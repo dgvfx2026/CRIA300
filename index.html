@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- ── SEO ── -->
+<!-- SEO -->
 <title>CRIA — 300 Prompts de IA para Criadores de Conteúdo | DG VFX</title>
 <meta name="description" content="300 prompts prontos para imagens e vídeos profissionais com IA. Feito por DG (@dg_vfx) para criadores que querem parar de perder tempo e começar a produzir resultados reais. Acesso imediato por R$47.">
 <meta name="keywords" content="prompts de IA, pack de prompts, GPT Image, Seedance, Kling, criadores de conteúdo, imagens IA, vídeos IA, DG VFX, CRIA">
 <meta name="author" content="Douglas Ferreira — DG VFX">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://dg-vfx.github.io/cria/">
+<link rel="canonical" href="https://cria300.vercel.app/">
 
-<!-- ── OPEN GRAPH (Facebook, WhatsApp, Instagram) ── -->
+<!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://dg-vfx.github.io/cria/">
+<meta property="og:url" content="https://cria300.vercel.app/">
 <meta property="og:title" content="CRIA — 300 Prompts de IA para Criadores de Conteúdo">
 <meta property="og:description" content="Pare de perder horas escrevendo prompts. 300 prompts prontos para imagens e vídeos profissionais com IA — por apenas R$47.">
 <meta property="og:image" content="https://lh3.googleusercontent.com/d/1CK__sXvBUAkg2Y6lwmZbfHXDsQCF6fTQ">
@@ -23,456 +23,492 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="CRIA by DG VFX">
 
-<!-- ── TWITTER / X CARD ── -->
+<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CRIA — 300 Prompts de IA para Criadores de Conteúdo">
 <meta name="twitter:description" content="300 prompts prontos para imagens e vídeos profissionais com IA — por apenas R$47.">
 <meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1CK__sXvBUAkg2Y6lwmZbfHXDsQCF6fTQ">
 <meta name="twitter:creator" content="@dg_vfx">
 
-<!-- ── FAVICON ── -->
+<!-- Favicon -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
+/* ── DESIGN SYSTEM ── */
+:root {
+  --blue:#3B82F6; --blue-d:#1D4ED8; --blue-l:#EFF6FF; --blue-m:#BFDBFE;
+  --violet:#7C3AED; --violet-l:#F5F3FF; --violet-m:#DDD6FE;
+  --dark:#0D1117; --dark2:#0F1623; --dark3:#161B27; --dark4:#1E2435;
+  --white:#FFFFFF; --gray:#6B7280; --lgray:#9CA3AF;
+  --border:rgba(255,255,255,0.07);
+  --green:#10B981;
+  --grad-main:linear-gradient(135deg,#3B82F6,#7C3AED);
+  --grad-blue:linear-gradient(135deg,#3B82F6,#1D4ED8);
+  --glass:rgba(255,255,255,0.035);
+  --glass-b:rgba(255,255,255,0.07);
+  --glow-blue:0 0 40px rgba(59,130,246,0.25);
+  --glow-v:0 0 40px rgba(124,58,237,0.25);
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --blue:#3B82F6;--blue-d:#1D4ED8;--violet:#7C3AED;
-  --dark:#0D1117;--dark2:#161B27;--dark3:#1E2435;
-  --white:#FFFFFF;--lgray:#9CA3AF;--gray:#6B7280;
-  --green:#10B981;--bdr:rgba(255,255,255,0.07);
-}
 html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--dark);color:var(--white);line-height:1.6;overflow-x:hidden}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--dark);color:var(--white);font-size:16px;line-height:1.65;overflow-x:hidden}
+img,video{max-width:100%}
 
-/* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(59,130,246,0.3)}50%{box-shadow:0 0 44px rgba(59,130,246,0.6)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
-@keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+/* ── UTILS ── */
+.si{max-width:1120px;margin:0 auto;padding:0 28px}
+.grad-text{background:var(--grad-main);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.07);padding:7px 18px;border-radius:40px;margin-bottom:20px}
+.sh{font-size:clamp(30px,4.5vw,50px);font-weight:800;line-height:1.1;letter-spacing:-1px;margin-bottom:14px}
+.ss{font-size:17px;color:var(--lgray);max-width:600px;line-height:1.7;margin-bottom:52px}
+.tc{text-align:center}
 
-.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease}
+/* ── REVEAL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s cubic-bezier(.4,0,.2,1),transform 0.65s cubic-bezier(.4,0,.2,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
-.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+.d1{transition-delay:.06s}.d2{transition-delay:.14s}.d3{transition-delay:.22s}
+.d4{transition-delay:.30s}.d5{transition-delay:.38s}.d6{transition-delay:.46s}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 64px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 50% -5%,rgba(59,130,246,0.16) 0%,transparent 65%),radial-gradient(ellipse 40% 35% at 85% 85%,rgba(124,58,237,0.10) 0%,transparent 60%);pointer-events:none}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);border:1px solid rgba(59,130,246,0.35);background:rgba(59,130,246,0.08);padding:8px 22px;border-radius:40px;margin-bottom:36px;animation:fadeUp 0.8s ease both}
-.hero h1{font-size:clamp(34px,6vw,68px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:22px;max-width:860px;animation:fadeUp 0.8s ease 0.1s both}
-.hero h1 .hl{color:var(--blue)}.hero h1 .hv{color:#A78BFA}
-.hero-sub{font-size:clamp(15px,2vw,18px);color:var(--lgray);max-width:560px;margin:0 auto 44px;line-height:1.75;animation:fadeUp 0.8s ease 0.2s both}
+/* ── GLASS CARD ── */
+.gc{background:var(--glass);border:1px solid var(--glass-b);border-radius:22px;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+.gc:hover{transform:translateY(-6px);box-shadow:var(--glow-blue);border-color:rgba(59,130,246,0.28)}
+
+/* ── BUTTONS ── */
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--grad-main);color:#fff;text-decoration:none;border-radius:14px;padding:17px 40px;font-size:16px;font-weight:800;letter-spacing:.3px;transition:transform .2s,box-shadow .3s;animation:pglow 3s ease-in-out infinite}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 48px rgba(59,130,246,0.5)}
+.btn-buy{display:block;width:100%;background:var(--grad-main);color:#fff;text-align:center;text-decoration:none;border-radius:14px;padding:20px;font-size:17px;font-weight:800;letter-spacing:.3px;margin-top:28px;transition:transform .2s,box-shadow .3s;animation:pglow 3s ease-in-out infinite}
+.btn-buy:hover{transform:translateY(-2px);box-shadow:0 10px 48px rgba(59,130,246,0.5)}
+@keyframes pglow{0%,100%{box-shadow:0 0 24px rgba(59,130,246,0.35)}50%{box-shadow:0 0 56px rgba(124,58,237,0.5)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+/* ── SECTIONS ── */
+section{padding:96px 0}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 24px;position:relative;overflow:hidden;background:var(--dark)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 75% 5%,rgba(59,130,246,0.18) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 5% 90%,rgba(124,58,237,0.15) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 50% 50%,rgba(59,130,246,0.04) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:940px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);border:1px solid rgba(59,130,246,0.35);background:rgba(59,130,246,0.07);padding:8px 22px;border-radius:40px;margin-bottom:44px}
+.hero h1{font-size:clamp(80px,18vw,160px);font-weight:900;line-height:.88;letter-spacing:-6px;margin-bottom:28px;background:linear-gradient(145deg,#fff 0%,#93C5FD 45%,#C4B5FD 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(17px,2.2vw,21px);color:var(--lgray);max-width:540px;margin:0 auto 52px;line-height:1.55}
 .hero-sub strong{color:var(--white)}
-.hero-cta{animation:fadeUp 0.8s ease 0.3s both;display:flex;flex-direction:column;align-items:center;gap:14px}
-.btn-primary{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--blue),var(--blue-d));color:var(--white);font-size:17px;font-weight:800;padding:18px 44px;border-radius:14px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;animation:pulseGlow 3s ease infinite}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 48px rgba(59,130,246,0.55)!important}
-.hero-note{font-size:13px;color:var(--gray)}
-.hero-tools{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:48px;animation:fadeUp 0.8s ease 0.4s both}
-.tb{padding:6px 14px;border-radius:8px;font-size:11px;font-weight:700}
-.ti{background:rgba(59,130,246,0.12);color:#93C5FD;border:1px solid rgba(59,130,246,0.2)}
-.tv{background:rgba(124,58,237,0.12);color:#C4B5FD;border:1px solid rgba(124,58,237,0.2)}
-.tg{background:rgba(16,185,129,0.10);color:#6EE7B7;border:1px solid rgba(16,185,129,0.18)}
+.hero-cards{display:flex;justify-content:center;align-items:flex-end;gap:10px;margin-top:64px;flex-wrap:wrap}
+.hc{border-radius:18px;overflow:hidden;border:1px solid var(--glass-b);box-shadow:0 12px 48px rgba(0,0,0,0.5);flex-shrink:0}
+.hc img{width:100%;height:100%;object-fit:cover;display:block}
+.hc:nth-child(1){width:130px;height:165px;animation:float 4.2s ease-in-out infinite}
+.hc:nth-child(2){width:165px;height:210px;animation:float 3.8s ease-in-out infinite;animation-delay:-.8s}
+.hc:nth-child(3){width:145px;height:185px;animation:float 4.5s ease-in-out infinite;animation-delay:-1.6s}
+.hc:nth-child(4){width:130px;height:165px;animation:float 3.6s ease-in-out infinite;animation-delay:-2.4s}
+.hc:nth-child(5){width:115px;height:145px;animation:float 4s ease-in-out infinite;animation-delay:-3.2s}
+.hero-note{margin-top:24px;font-size:13px;color:rgba(255,255,255,0.3);letter-spacing:2px}
 
-/* STATS */
-.stats-bar{background:var(--dark2);border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);padding:26px 24px}
-.stats-inner{max-width:860px;margin:0 auto;display:flex;justify-content:center;flex-wrap:wrap}
-.stat{text-align:center;padding:8px 36px;border-right:1px solid var(--bdr)}
-.stat:last-child{border-right:none}
-.stat .num{font-size:36px;font-weight:900;color:var(--white);line-height:1;letter-spacing:-1px}
-.stat .num em{color:var(--blue);font-style:normal}
-.stat .lbl{font-size:10px;color:var(--lgray);letter-spacing:2px;text-transform:uppercase;margin-top:3px}
-
-/* GENERIC */
-section{padding:92px 24px}
-.si{max-width:1080px;margin:0 auto}
-.stag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);background:rgba(59,130,246,0.10);border:1px solid rgba(59,130,246,0.18);padding:5px 14px;border-radius:20px;margin-bottom:18px}
-.sh{font-size:clamp(26px,4vw,44px);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:14px}
-.ss{color:var(--lgray);font-size:16px;max-width:540px;line-height:1.75}
-
-/* PROBLEM */
-.problem{background:var(--dark)}
-.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:48px}
-.pc{background:var(--dark2);border:1px solid var(--bdr);border-radius:16px;padding:26px;transition:border-color 0.3s,transform 0.3s}
-.pc:hover{border-color:rgba(59,130,246,0.22);transform:translateY(-4px)}
-.pc.hl{border-color:rgba(59,130,246,0.28);background:rgba(59,130,246,0.05)}
-.pc .ico{font-size:24px;margin-bottom:12px}
-.pc h3{font-size:15px;font-weight:700;margin-bottom:8px}
-.pc p{color:var(--lgray);font-size:13px;line-height:1.7}
-
-/* INSIDE */
-.inside{background:var(--dark2)}
-.ig{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:13px;margin-top:46px}
-.ic{background:var(--dark3);border:1px solid var(--bdr);border-radius:14px;padding:20px;transition:border-color 0.3s,transform 0.3s}
-.ic:hover{border-color:rgba(59,130,246,0.28);transform:translateY(-3px)}
-.ictag{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:11px}
-.ii{background:rgba(59,130,246,0.14);color:#93C5FD}
-.iv{background:rgba(124,58,237,0.14);color:#C4B5FD}
-.ic h3{font-size:14px;font-weight:700;color:var(--white);margin-bottom:6px}
-.ic p{color:var(--lgray);font-size:12px;line-height:1.6}
-.ic .cnt{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);margin-top:10px;font-weight:500}
-
-/* GALLERY */
-.gallery{background:var(--dark)}
-.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:46px}
-.gcol{display:flex;flex-direction:column;gap:14px}
-.gph{background:var(--dark2);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;min-height:190px}
-.gph.tall{min-height:270px}
-.gph-inner{display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px;text-align:center}
-.gph-icon{font-size:26px;opacity:0.3}
-.gph-lbl{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--lgray);opacity:0.4}
-.gph-bar{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--violet),var(--blue));background-size:200%;animation:shimmer 2.5s linear infinite}
-.gal-note{text-align:center;margin-top:20px;font-size:13px;color:var(--gray);font-style:italic}
-
-/* BENEFITS */
-.benefits{background:var(--dark2)}
-.bl{list-style:none;margin-top:46px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.bl li{display:flex;align-items:flex-start;gap:15px;background:var(--dark3);border:1px solid var(--bdr);border-radius:14px;padding:22px;transition:border-color 0.3s,transform 0.3s}
-.bl li:hover{border-color:rgba(59,130,246,0.2);transform:translateY(-3px)}
-.bico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;background:rgba(59,130,246,0.12)}
-.btxt h4{font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px}
-.btxt p{font-size:12.5px;color:var(--lgray);line-height:1.65}
-
-/* PREVIEW */
-.preview{background:var(--dark)}
-.pvg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:13px;margin-top:46px}
-.pvcard{background:var(--dark2);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;transition:border-color 0.3s,transform 0.3s}
-.pvcard:hover{border-color:rgba(59,130,246,0.28);transform:translateY(-3px)}
-.pvh{padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bdr)}
-.pn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px}
-.pni{background:rgba(59,130,246,0.15);color:#93C5FD}
-.pnv{background:rgba(124,58,237,0.15);color:#C4B5FD}
-.pvt{font-size:13px;font-weight:600;color:var(--white)}
-.pvb{padding:13px 16px;font-size:11.5px;color:var(--lgray);line-height:1.75;font-family:'JetBrains Mono',monospace}
-.pvb strong{color:#93C5FD}
-
-/* TOOLS */
-.tools-sec{background:var(--dark2)}
-.tc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:13px;margin-top:46px}
-.tc{background:var(--dark3);border:1px solid var(--bdr);border-radius:14px;padding:22px;text-align:center;transition:border-color 0.3s,transform 0.3s}
-.tc:hover{border-color:rgba(59,130,246,0.25);transform:translateY(-3px)}
-.tc .tico{font-size:26px;margin-bottom:10px}
-.tc h4{font-size:13px;font-weight:700;color:var(--white);margin-bottom:4px}
-.tc p{font-size:11px;color:var(--lgray);line-height:1.5}
-.tuse{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-top:9px}
-
-/* AUTHOR */
-.author-sec{background:var(--dark)}
-.au-inner{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:56px;flex-wrap:wrap}
-.au-photo{width:180px;height:180px;border-radius:50%;object-fit:cover;border:3px solid rgba(59,130,246,0.4);flex-shrink:0;animation:float 4s ease-in-out infinite;box-shadow:0 0 40px rgba(59,130,246,0.18)}
-.au-content h2{font-size:32px;font-weight:900;letter-spacing:-1px;margin-bottom:3px}
-.au-handle{color:var(--blue);font-size:14px;font-weight:600;margin-bottom:16px;display:block}
-.au-content p{color:var(--lgray);font-size:14px;line-height:1.75;margin-bottom:10px}
-
-/* PRICING */
-.pricing{background:var(--dark2);text-align:center}
-.pbox{max-width:480px;margin:46px auto 0;background:linear-gradient(145deg,var(--dark3),#0d111a);border:1px solid rgba(59,130,246,0.22);border-radius:24px;padding:44px 34px;position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s}
-.pbox:hover{transform:translateY(-5px);box-shadow:0 28px 64px rgba(59,130,246,0.18)}
-.pbox::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--violet))}
-.pbadge{display:inline-block;background:rgba(16,185,129,0.14);color:#6EE7B7;border:1px solid rgba(16,185,129,0.22);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:18px}
-.pbox h3{font-size:18px;font-weight:800;margin-bottom:28px}
-.pmain{font-size:68px;font-weight:900;line-height:1;letter-spacing:-2px;margin-bottom:4px}
-.pmain sup{font-size:22px;vertical-align:top;margin-top:14px;margin-right:2px;color:var(--lgray)}
-.pnote{font-size:12px;color:var(--lgray);margin-bottom:28px}
-.pinc{list-style:none;text-align:left;margin-bottom:30px}
-.pinc li{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;color:var(--lgray)}
-.pinc li:last-child{border-bottom:none}
-.pinc li span{color:var(--green);flex-shrink:0}
-.pinc li strong{color:var(--white)}
-.btn-buy{display:block;width:100%;background:linear-gradient(135deg,var(--blue),var(--blue-d));color:var(--white);font-size:17px;font-weight:800;padding:18px;border-radius:14px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 8px 28px rgba(59,130,246,0.28);text-align:center}
-.btn-buy:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(59,130,246,0.48)}
-.pguarantee{font-size:12px;color:var(--gray);margin-top:14px}
-
-/* FAQ */
-.faq-sec{background:var(--dark)}
-.fq-list{max-width:680px;margin:46px auto 0;display:flex;flex-direction:column;gap:9px}
-.fq{background:var(--dark2);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;transition:border-color 0.3s}
-.fq:hover{border-color:rgba(59,130,246,0.2)}
-.fq-q{padding:19px 22px;font-size:14px;font-weight:700;color:var(--white);cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
-.fq-q::after{content:'+';font-size:20px;color:var(--blue);font-weight:300;transition:transform 0.3s}
-.fq.open .fq-q::after{transform:rotate(45deg)}
-.fq-a{font-size:13px;color:var(--lgray);line-height:1.7;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s}
-.fq.open .fq-a{max-height:180px;padding:0 22px 18px}
-
-/* FINAL CTA */
-.final-cta{background:linear-gradient(135deg,rgba(59,130,246,0.09),rgba(124,58,237,0.06));padding:76px 24px;text-align:center;border-top:1px solid rgba(59,130,246,0.1)}
-.final-cta h2{font-size:clamp(24px,4vw,44px);font-weight:900;letter-spacing:-1px;margin-bottom:14px}
-.final-cta p{color:var(--lgray);font-size:16px;margin-bottom:34px}
-
-footer{background:var(--dark);border-top:1px solid var(--bdr);padding:32px 24px;text-align:center}
-footer p{color:var(--gray);font-size:12px;margin-bottom:5px}
-footer a{color:var(--blue);text-decoration:none}
-
-@media(max-width:680px){
-  .stat{padding:10px 18px;border-right:none;border-bottom:1px solid var(--bdr)}
-  .stat:last-child{border-bottom:none}
-  .au-inner{flex-direction:column;gap:26px}
-  .au-photo{width:110px;height:110px}
-  .pbox{padding:30px 18px}
-  .pmain{font-size:54px}
-  .gal-grid{grid-template-columns:1fr 1fr}
-  .gcol:last-child{display:none}
-}
-/* ── TIMER ── */
-.timer-wrap{text-align:center;margin:32px auto 28px;max-width:420px}
-.timer-label{font-size:13px;color:var(--lgray);letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;font-weight:600}
-.timer-boxes{display:flex;align-items:center;justify-content:center;gap:10px}
-.tbox{background:var(--dark2);border:1px solid rgba(59,130,246,0.25);border-radius:12px;padding:14px 20px;min-width:72px;text-align:center}
-.tbox span{display:block;font-size:36px;font-weight:800;color:var(--white);line-height:1;font-family:'JetBrains Mono',monospace;letter-spacing:-1px}
-.tbox small{display:block;font-size:10px;color:var(--lgray);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
-.tsep{font-size:32px;font-weight:800;color:var(--blue);line-height:1;margin-bottom:18px}
-/* ── STICKY CTA ── */
-.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(13,17,23,0.96);backdrop-filter:blur(12px);border-top:1px solid rgba(59,130,246,0.2);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;transform:translateY(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);box-shadow:0 -4px 32px rgba(0,0,0,0.4)}
-.sticky-cta.show{transform:translateY(0)}
-.sticky-cta .sc-text{color:rgba(255,255,255,0.75);font-size:13px;white-space:nowrap}
-.sticky-cta .sc-text strong{color:#fff}
-.sticky-cta .sc-btn{background:linear-gradient(135deg,var(--blue),var(--blue-d));color:#fff;border:none;border-radius:10px;padding:11px 28px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block;transition:opacity .2s}
-.sticky-cta .sc-btn:hover{opacity:.88}
-@media(max-width:520px){
-  .sticky-cta{flex-direction:column;gap:10px;padding:12px 16px}
-  .sticky-cta .sc-text{font-size:12px;text-align:center}
-  .sticky-cta .sc-btn{width:100%;text-align:center;padding:13px}
-}
 /* ── GALLERY ── */
-.gal-wrap{margin-top:48px;display:flex;flex-direction:column;gap:10px}
-/* Single media item */
-.gmedia{border-radius:16px;overflow:hidden;display:block;width:100%;background:var(--dark2)}
-.gmedia img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease}
-.gmedia:hover img{transform:scale(1.03)}
-.gmedia video{width:100%;display:block;border-radius:16px;background:#000}
-/* Row layouts */
-.grow{display:grid;gap:10px}
+.gallery{background:var(--dark2);position:relative;overflow:hidden}
+.gallery::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,0.08) 0%,transparent 70%);pointer-events:none}
+.gallery .si{text-align:center}
+.gal-wrap{margin-top:52px;display:flex;flex-direction:column;gap:12px}
+.grow{display:grid;gap:12px}
 .grow-1{grid-template-columns:1fr}
 .grow-2{grid-template-columns:1fr 1fr}
 .grow-3{grid-template-columns:1fr 1fr 1fr}
 .grow-12{grid-template-columns:2fr 1fr}
-/* Fixed heights for image rows */
-.grow .gmedia.h-sm{height:180px}
-.grow .gmedia.h-md{height:240px}
-.grow .gmedia.h-lg{height:320px}
-/* Videos always auto height with aspect ratio */
-.gmedia.is-video{height:auto;background:#000}
-/* Tablet ≤ 860px */
-@media(max-width:860px){
+.gmedia{border-radius:20px;overflow:hidden;position:relative;background:var(--dark3);display:block}
+.gmedia img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.gmedia:hover img{transform:scale(1.06)}
+.gmedia:hover{box-shadow:0 8px 40px rgba(59,130,246,0.2)}
+.gmedia video{width:100%;display:block;background:#000}
+.gmedia.h-sm{height:180px}.gmedia.h-md{height:240px}.gmedia.h-lg{height:340px}
+.gmedia.is-video{height:auto}
+.gmbadge{position:absolute;bottom:14px;left:14px;background:rgba(0,0,0,0.65);backdrop-filter:blur(12px);color:rgba(255,255,255,0.85);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 13px;border-radius:20px;border:1px solid rgba(255,255,255,0.1)}
+.gmoverlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.45) 0%,transparent 55%);pointer-events:none;border-radius:20px}
+
+/* ── HOW IT WORKS ── */
+.how-it-works{background:var(--dark);position:relative;overflow:hidden}
+.how-it-works::before{content:'';position:absolute;bottom:-200px;left:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,0.07) 0%,transparent 70%);pointer-events:none}
+.hiw-grid{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:0;margin-top:56px}
+.hiw-step{background:var(--glass);border:1px solid var(--glass-b);border-radius:24px;padding:40px 28px;text-align:center;transition:transform .3s,box-shadow .3s,border-color .3s;height:100%}
+.hiw-step:hover{transform:translateY(-6px);box-shadow:var(--glow-blue);border-color:rgba(59,130,246,0.35)}
+.hiw-num{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;background:var(--grad-main);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px}
+.hiw-icon{font-size:52px;margin-bottom:16px;display:block}
+.hiw-step h3{font-size:18px;font-weight:800;margin-bottom:10px;color:var(--white)}
+.hiw-step p{font-size:14px;color:var(--lgray);line-height:1.65}
+.hiw-code{background:rgba(59,130,246,0.15);color:#93C5FD;padding:2px 8px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:13px}
+.hiw-arrow{font-size:28px;color:rgba(59,130,246,0.45);padding:0 20px;flex-shrink:0;font-weight:300}
+
+/* ── PROBLEM ── */
+.problem{background:var(--dark2)}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:52px}
+.prob-card{background:var(--glass);border:1px solid var(--glass-b);border-radius:22px;padding:32px;transition:transform .3s,border-color .3s,box-shadow .3s}
+.prob-card:hover{transform:translateY(-5px);border-color:rgba(239,68,68,0.3);box-shadow:0 8px 32px rgba(239,68,68,0.1)}
+.prob-icon{font-size:32px;margin-bottom:16px}
+.prob-card h4{font-size:17px;font-weight:700;color:var(--white);margin-bottom:10px}
+.prob-card p{font-size:14px;color:var(--lgray);line-height:1.65}
+
+/* ── INSIDE ── */
+.inside{background:var(--dark)}
+.inc-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:52px}
+.inc-half{background:var(--glass);border:1px solid var(--glass-b);border-radius:24px;padding:40px 36px;transition:transform .3s,box-shadow .3s,border-color .3s;position:relative;overflow:hidden}
+.inc-half::before{content:'';position:absolute;inset:0;opacity:.5;border-radius:24px;pointer-events:none}
+.inc-half.img-half::before{background:radial-gradient(ellipse 120% 80% at 0% 0%,rgba(59,130,246,0.1) 0%,transparent 60%)}
+.inc-half.vid-half::before{background:radial-gradient(ellipse 120% 80% at 0% 0%,rgba(124,58,237,0.1) 0%,transparent 60%)}
+.inc-half:hover{transform:translateY(-6px);border-color:rgba(59,130,246,0.3);box-shadow:var(--glow-blue)}
+.inc-half.vid-half:hover{border-color:rgba(124,58,237,0.3);box-shadow:var(--glow-v)}
+.inc-half-icon{font-size:52px;margin-bottom:20px;display:block}
+.inc-half-num{font-size:64px;font-weight:900;line-height:1;letter-spacing:-3px;margin-bottom:6px}
+.inc-half.img-half .inc-half-num{background:var(--grad-blue);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.inc-half.vid-half .inc-half-num{background:linear-gradient(135deg,#7C3AED,#C4B5FD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.inc-half h3{font-size:22px;font-weight:800;color:var(--white);margin-bottom:10px}
+.inc-half p{font-size:14px;color:var(--lgray);line-height:1.65;margin-bottom:24px}
+.inc-cats{display:flex;flex-wrap:wrap;gap:8px}
+.inc-cat{font-size:12px;font-weight:600;padding:5px 13px;border-radius:20px;letter-spacing:.3px}
+.img-half .inc-cat{background:rgba(59,130,246,0.12);color:#93C5FD;border:1px solid rgba(59,130,246,0.2)}
+.vid-half .inc-cat{background:rgba(124,58,237,0.12);color:#C4B5FD;border:1px solid rgba(124,58,237,0.2)}
+.inc-more{text-align:center;margin-top:28px;font-size:14px;color:var(--lgray)}
+.inc-more span{color:var(--blue);font-weight:600}
+
+/* ── BENEFITS ── */
+.benefits{background:var(--dark2)}
+.ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
+.ben-item{background:var(--glass);border:1px solid var(--glass-b);border-radius:22px;padding:30px;transition:transform .3s,border-color .3s,box-shadow .3s}
+.ben-item:hover{transform:translateY(-5px);border-color:rgba(16,185,129,0.3);box-shadow:0 8px 32px rgba(16,185,129,0.1)}
+.ben-ico{font-size:38px;margin-bottom:16px}
+.ben-item h4{font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px}
+.ben-item p{font-size:14px;color:var(--lgray);line-height:1.65}
+
+/* ── AUTHOR ── */
+.author-sec{background:var(--dark);position:relative;overflow:hidden}
+.author-sec::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(59,130,246,0.06) 0%,transparent 70%);pointer-events:none}
+.au-inner{display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:center;max-width:880px;margin:0 auto;position:relative;z-index:1}
+.au-photo{width:190px;height:190px;border-radius:50%;object-fit:cover;border:2px solid rgba(59,130,246,0.45);box-shadow:0 0 48px rgba(59,130,246,0.2);flex-shrink:0}
+.au-content h2{font-size:38px;font-weight:900;margin-bottom:4px;letter-spacing:-1px}
+.au-handle{font-size:14px;color:var(--lgray);margin-bottom:20px;display:block}
+.au-handle a{color:var(--blue);text-decoration:none;font-weight:600}
+.au-content p{font-size:15px;color:var(--lgray);margin-bottom:12px;line-height:1.75}
+
+/* ── PRICING ── */
+.pricing{background:var(--dark2);position:relative;overflow:hidden}
+.pricing::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 50% 50%,rgba(59,130,246,0.07) 0%,transparent 70%);pointer-events:none}
+.pricing .si{text-align:center;position:relative;z-index:1}
+.pbox{background:var(--glass);border:1px solid rgba(59,130,246,0.22);border-radius:28px;padding:52px 44px;max-width:520px;margin:0 auto;box-shadow:0 0 80px rgba(59,130,246,0.1),inset 0 1px 0 rgba(255,255,255,0.06)}
+.pbadge{display:inline-block;background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(124,58,237,0.2));border:1px solid rgba(59,130,246,0.3);color:#93C5FD;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:7px 20px;border-radius:40px;margin-bottom:20px}
+.pbox h3{font-size:20px;font-weight:700;margin-bottom:28px;color:rgba(255,255,255,0.7)}
+.pmain{font-size:88px;font-weight:900;line-height:1;color:var(--white);letter-spacing:-4px;margin:6px 0 6px}
+.pmain sup{font-size:30px;font-weight:700;vertical-align:top;margin-top:18px;display:inline-block;letter-spacing:0}
+.pnote{font-size:14px;color:var(--lgray);margin-bottom:32px}
+.pinc{list-style:none;text-align:left;margin-bottom:32px;display:flex;flex-direction:column;gap:13px}
+.pinc li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:rgba(255,255,255,0.82);line-height:1.5}
+.pinc li span{flex-shrink:0;margin-top:1px}
+.psafe{font-size:12px;color:var(--lgray);margin-top:18px}
+
+/* ── TIMER ── */
+.timer-wrap{text-align:center;margin:36px auto 32px;max-width:400px}
+.timer-label{font-size:12px;color:var(--lgray);letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;font-weight:700}
+.timer-boxes{display:flex;align-items:center;justify-content:center;gap:10px}
+.tbox{background:var(--dark3);border:1px solid rgba(59,130,246,0.2);border-radius:14px;padding:14px 18px;min-width:72px;text-align:center}
+.tbox span{display:block;font-size:38px;font-weight:900;color:var(--white);line-height:1;font-family:'JetBrains Mono',monospace;letter-spacing:-2px}
+.tbox small{display:block;font-size:10px;color:var(--lgray);letter-spacing:2px;text-transform:uppercase;margin-top:5px}
+.tsep{font-size:32px;font-weight:900;color:var(--blue);line-height:1;margin-bottom:20px}
+
+/* ── FAQ ── */
+.faq-sec{background:var(--dark)}
+.faq-wrap{max-width:720px;margin:52px auto 0;display:flex;flex-direction:column;gap:10px}
+.fq{background:var(--glass);border:1px solid var(--glass-b);border-radius:18px;overflow:hidden;transition:border-color .3s}
+.fq.open{border-color:rgba(59,130,246,0.35)}
+.fq-q{padding:22px 26px;font-size:16px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;color:var(--white);user-select:none}
+.fq-q::after{content:'+';font-size:24px;color:var(--blue);font-weight:300;transition:transform .3s;flex-shrink:0;line-height:1}
+.fq.open .fq-q::after{transform:rotate(45deg)}
+.fq-a{padding:0 26px;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;font-size:14px;color:var(--lgray);line-height:1.75}
+.fq.open .fq-a{max-height:300px;padding:0 26px 24px}
+
+/* ── FINAL CTA ── */
+.final-cta{background:var(--dark2);text-align:center;position:relative;overflow:hidden;padding:120px 24px}
+.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 50% 50%,rgba(59,130,246,0.12) 0%,transparent 65%);pointer-events:none}
+.final-cta h2{font-size:clamp(28px,4.5vw,48px);font-weight:900;line-height:1.15;margin-bottom:18px;letter-spacing:-1px;position:relative}
+.final-cta p{color:var(--lgray);font-size:16px;margin-bottom:40px;position:relative}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);border-top:1px solid var(--glass-b);padding:36px 24px;text-align:center;font-size:13px;color:var(--lgray);line-height:2.2}
+footer a{color:var(--blue);text-decoration:none}
+
+/* ── STICKY CTA ── */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(10,14,20,0.97);backdrop-filter:blur(20px);border-top:1px solid rgba(59,130,246,0.2);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:0 -6px 40px rgba(0,0,0,0.5)}
+.sticky-cta.show{transform:translateY(0)}
+.sc-text{color:rgba(255,255,255,0.7);font-size:13px;white-space:nowrap}
+.sc-text strong{color:#fff}
+.sc-btn{background:var(--grad-main);color:#fff;border:none;border-radius:11px;padding:12px 28px;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block;transition:opacity .2s,transform .2s}
+.sc-btn:hover{opacity:.88;transform:translateY(-1px)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  section{padding:72px 0}
+  .hiw-grid{grid-template-columns:1fr;gap:14px}
+  .hiw-arrow{transform:rotate(90deg);text-align:center;padding:4px 0;font-size:22px}
+  .inc-split{grid-template-columns:1fr}
+  .ben-grid{grid-template-columns:1fr 1fr}
+  .prob-grid{grid-template-columns:1fr 1fr}
+  .au-inner{grid-template-columns:1fr;text-align:center;gap:36px}
+  .au-photo{margin:0 auto}
   .grow-3{grid-template-columns:1fr 1fr}
   .grow-12{grid-template-columns:1fr 1fr}
-  .grow .gmedia.h-sm,.grow .gmedia.h-md{height:180px}
-  .grow .gmedia.h-lg{height:240px}
+  .hero-cards{gap:8px}
+  .hc:nth-child(1){width:105px;height:135px}
+  .hc:nth-child(2){width:130px;height:168px}
+  .hc:nth-child(3){width:115px;height:148px}
+  .hc:nth-child(4){width:105px;height:135px}
+  .hc:nth-child(5){width:90px;height:115px}
 }
-/* Mobile ≤ 560px — tudo empilhado, sem crop */
-@media(max-width:560px){
+@media(max-width:580px){
+  section{padding:56px 0}
+  .final-cta{padding:80px 24px}
+  .prob-grid,.inc-grid,.ben-grid{grid-template-columns:1fr}
   .grow-2,.grow-3,.grow-12{grid-template-columns:1fr}
   .grow .gmedia.h-sm,.grow .gmedia.h-md,.grow .gmedia.h-lg{height:auto;aspect-ratio:4/3}
-  .gmedia.is-video video{border-radius:12px}
+  .pbox{padding:36px 22px}
+  .sticky-cta{flex-direction:column;gap:10px;padding:14px 18px}
+  .sc-text{font-size:12px;text-align:center}
+  .sc-btn{width:100%;text-align:center;padding:14px}
+  .hc:nth-child(4),.hc:nth-child(5){display:none}
+  .hc:nth-child(1){width:90px;height:115px}
+  .hc:nth-child(2){width:115px;height:148px}
+  .hc:nth-child(3){width:100px;height:128px}
 }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
+<!-- ── 1. HERO ── -->
 <section class="hero">
-  <div class="hero-badge">por <strong>DG</strong> &nbsp;·&nbsp; @dg_vfx</div>
-  <h1><span class="hl" style="font-size:1.15em;letter-spacing:-3px">CRIA</span><br><span style="font-size:0.55em;font-weight:700;letter-spacing:-1px;color:rgba(255,255,255,0.75)">300 prompts de IA para criadores de conteúdo</span></h1>
-  <p class="hero-sub">Imagens e vídeos <strong>prontos para usar</strong> — sem perder horas escrevendo prompt, sem resultado genérico, sem curva de aprendizado.</p>
-  <div class="hero-cta">
-    <a href="https://pay.kiwify.com.br/7fTgGYD" target="_blank" class="btn-primary">
+  <div class="hero-inner">
+    <div class="hero-badge reveal">⚡ v5.0 &nbsp;·&nbsp; 300 Prompts de IA</div>
+    <h1 class="reveal d1">CRIA</h1>
+    <p class="hero-sub reveal d2">
+      <strong>300 prompts prontos</strong> para imagens e vídeos profissionais com IA.<br>
+      Sem perder horas descobrindo o prompt certo.
+    </p>
+    <a href="https://pay.kiwify.com.br/7fTgGYD" target="_blank" class="btn-primary reveal d3">
       Quero o CRIA Agora &nbsp;→
     </a>
-    <p class="hero-note">✅ Acesso imediato &nbsp;·&nbsp; PDF pronto para usar &nbsp;·&nbsp; Sem mensalidade</p>
-  </div>
-
-  <div class="hero-tools">
-    <span class="tb ti">GPT Image</span>
-    <span class="tb ti">Nano Banana</span>
-    <span class="tb tv">Seedance 2.0</span>
-    <span class="tb tv">Seedance 2.5</span>
-    <span class="tb tv">Kling 3.0</span>
-    <span class="tb tg">Google Flow</span>
-  </div>
-</section>
-
-<!-- STATS -->
-<div class="stats-bar reveal">
-  <div class="stats-inner">
-    <div class="stat"><div class="num"><em>300</em></div><div class="lbl">Prompts Prontos</div></div>
-    <div class="stat"><div class="num"><em>150</em></div><div class="lbl">de Imagem</div></div>
-    <div class="stat"><div class="num"><em>150</em></div><div class="lbl">de Vídeo</div></div>
-    <div class="stat"><div class="num"><em>31</em></div><div class="lbl">Categorias</div></div>
-    <div class="stat"><div class="num"><em>6</em></div><div class="lbl">Ferramentas de IA</div></div>
-  </div>
-</div>
-
-<!-- PROBLEM -->
-<section class="problem">
-  <div class="si">
-    <div class="stag reveal">O problema</div>
-    <h2 class="sh reveal">Você já passou por isso?</h2>
-    <p class="ss reveal">A maioria dos criadores perde horas tentando descobrir o prompt certo — e o resultado ainda sai ruim.</p>
-    <div class="pg">
-      <div class="pc hl reveal d1"><div class="ico">😩</div><h3>Passa horas escrevendo prompts</h3><p>Você tenta, ajusta, tenta de novo — e o resultado ainda não é o que queria. Frustrante e sem fim.</p></div>
-      <div class="pc reveal d2"><div class="ico">📉</div><h3>As imagens parecem artificiais</h3><p>Textura plastificada, iluminação errada, detalhes irreais. O conteúdo entrega que é IA de longe.</p></div>
-      <div class="pc reveal d3"><div class="ico">🎥</div><h3>Os vídeos saem básicos demais</h3><p>Falta cinematografia, falta direção, falta qualidade. Sem personalidade suficiente para o feed.</p></div>
-      <div class="pc reveal d4"><div class="ico">⏰</div><h3>Tempo jogado fora</h3><p>Cada hora tentando achar o prompt certo é uma hora que você não está criando, postando ou vendendo.</p></div>
+    <div class="hero-cards reveal d4">
+      <div class="hc"><img src="https://lh3.googleusercontent.com/d/1va6Ipwc_6ViejyuJPOcOXuAu3z9q1ri_" alt=""></div>
+      <div class="hc"><img src="https://lh3.googleusercontent.com/d/1lMNrNrR3N31ZV9eNUAUYNcIc51iUdMJj" alt=""></div>
+      <div class="hc"><img src="https://lh3.googleusercontent.com/d/1CK__sXvBUAkg2Y6lwmZbfHXDsQCF6fTQ" alt=""></div>
+      <div class="hc"><img src="https://lh3.googleusercontent.com/d/1FwmXCAFc1IXsH_T0sPS4O_mRJ_3gpPpP" alt=""></div>
+      <div class="hc"><img src="https://lh3.googleusercontent.com/d/1vNXoFl-KfebRScydssHUTcFN0FHlcJB-" alt=""></div>
     </div>
+    <p class="hero-note reveal d5">150 imagens &nbsp;·&nbsp; 150 vídeos &nbsp;·&nbsp; 31 categorias</p>
   </div>
 </section>
 
-<!-- INSIDE -->
-<section class="inside">
-  <div class="si">
-    <div class="stag reveal">O que está incluso</div>
-    <h2 class="sh reveal">300 prompts em 31 categorias,<br>organizados por objetivo</h2>
-    <p class="ss reveal">Cada prompt foi testado e refinado para entregar resultados fotorrealistas — sem achismo, sem tentativa e erro.</p>
-    <div class="ig">
-      <div class="ic reveal d1"><span class="ictag ii">Imagem</span><h3>Packshots &amp; Produto</h3><p>Hero shots, macro extremo, ghost mannequin, superfície molhada e studio premium.</p><div class="cnt">15 prompts</div></div>
-      <div class="ic reveal d2"><span class="ictag ii">Imagem</span><h3>Efeitos Especiais de Produto</h3><p>Explosão de cor, respingo, produto levitando, partículas e fumaça cinematográfica.</p><div class="cnt">9 prompts</div></div>
-      <div class="ic reveal d3"><span class="ictag ii">Imagem</span><h3>Retratos &amp; Pessoas</h3><p>Lifestyle, estúdio profissional, outdoor e editorial com identidade preservada.</p><div class="cnt">16 prompts</div></div>
-      <div class="ic reveal d4"><span class="ictag ii">Imagem</span><h3>Posts para Redes Sociais</h3><p>Stories, feed, carrossel, Black Friday e posts avançados com campos personalizáveis.</p><div class="cnt">22 prompts · 2 categorias</div></div>
-      <div class="ic reveal d1"><span class="ictag ii">Imagem</span><h3>Moda &amp; Fashion Editorial</h3><p>Runway, editorial, luxury fashion, campanha de marca e street style profissional.</p><div class="cnt">15 prompts</div></div>
-      <div class="ic reveal d2"><span class="ictag ii">Imagem</span><h3>Gastronomia, Luxo &amp; Arquitetura</h3><p>Food styling, joias, acessórios premium e interiores de alto padrão.</p><div class="cnt">32 prompts · 3 categorias</div></div>
-      <div class="ic reveal d3"><span class="ictag ii">Imagem</span><h3>Macro, Neon, Cyberpunk &amp; Minimalismo</h3><p>Texturas extremas, futurismo, retratos neon, cyberpunk e composições minimalistas.</p><div class="cnt">41 prompts · 4 categorias</div></div>
-      <div class="ic reveal d4"><span class="ictag iv">Vídeo</span><h3>FOOH &amp; VFX</h3><p>Fake Out of Home cinematográfico, efeitos especiais e transformações de produto.</p><div class="cnt">10 prompts · 2 categorias</div></div>
-      <div class="ic reveal d1"><span class="ictag iv">Vídeo</span><h3>UGC &amp; Tutorial</h3><p>Conteúdo autêntico de criador, review, unboxing, how-to e dicas de produto.</p><div class="cnt">20 prompts · 2 categorias</div></div>
-      <div class="ic reveal d2"><span class="ictag iv">Vídeo</span><h3>Cinematic, Packshot &amp; Brand</h3><p>Hero shot cinematográfico, packshot premium, brand storytelling e animação.</p><div class="cnt">30 prompts · 5 categorias</div></div>
-      <div class="ic reveal d3"><span class="ictag iv">Vídeo</span><h3>Drone, Épico &amp; Esporte</h3><p>Aerial cinematic, épico em grande escala, surf, escalada, crossfit e ação.</p><div class="cnt">28 prompts · 3 categorias</div></div>
-      <div class="ic reveal d4"><span class="ictag iv">Vídeo</span><h3>Romance, Horror, Micro-Cinema &amp; Wildlife</h3><p>Cenas emocionais, suspense, micro-filmes, lifestyle e natureza cinematográfica.</p><div class="cnt">62 prompts · 5 categorias</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
+<!-- ── 2. GALLERY ── -->
 <section class="gallery">
   <div class="si">
     <div class="stag reveal">Resultados reais</div>
-    <h2 class="sh reveal">Criado com os prompts<br>do CRIA</h2>
-    <p class="ss reveal">Imagens e vídeos gerados usando os prompts exatamente como estão no PDF — sem edição adicional.</p>
+    <h2 class="sh reveal">O que você vai <span class="grad-text">criar hoje</span></h2>
+    <p class="ss tc reveal" style="margin:0 auto 52px">Imagens e vídeos gerados usando os prompts exatamente como estão no PDF — sem edição adicional.</p>
 
     <div class="gal-wrap reveal">
-
-      <!-- Linha 1: imagem grande + imagem -->
       <div class="grow grow-12">
         <div class="gmedia h-lg">
           <img src="https://lh3.googleusercontent.com/d/1CK__sXvBUAkg2Y6lwmZbfHXDsQCF6fTQ" alt="Criado com CRIA" loading="lazy">
+          <div class="gmoverlay"></div>
+          <div class="gmbadge">Produto · IA</div>
         </div>
         <div class="gmedia h-lg">
           <img src="https://lh3.googleusercontent.com/d/1FwmXCAFc1IXsH_T0sPS4O_mRJ_3gpPpP" alt="Criado com CRIA" loading="lazy">
+          <div class="gmoverlay"></div>
+          <div class="gmbadge">Retrato · IA</div>
         </div>
       </div>
 
-      <!-- Linha 2: vídeo 1 largura total -->
       <div class="grow grow-1">
         <div class="gmedia is-video">
           <video controls preload="metadata" playsinline>
             <source src="media/video1.mp4" type="video/mp4">
           </video>
+          <div class="gmbadge">Vídeo · IA</div>
         </div>
       </div>
 
-      <!-- Linha 3: 3 imagens -->
       <div class="grow grow-3">
         <div class="gmedia h-md">
           <img src="https://lh3.googleusercontent.com/d/1lMNrNrR3N31ZV9eNUAUYNcIc51iUdMJj" alt="Criado com CRIA" loading="lazy">
+          <div class="gmoverlay"></div>
+          <div class="gmbadge">Hero Shot · IA</div>
         </div>
         <div class="gmedia h-md">
           <img src="https://lh3.googleusercontent.com/d/1vNXoFl-KfebRScydssHUTcFN0FHlcJB-" alt="Criado com CRIA" loading="lazy">
+          <div class="gmoverlay"></div>
+          <div class="gmbadge">Macro · IA</div>
         </div>
         <div class="gmedia h-md">
           <img src="https://lh3.googleusercontent.com/d/1va6Ipwc_6ViejyuJPOcOXuAu3z9q1ri_" alt="Criado com CRIA" loading="lazy">
+          <div class="gmoverlay"></div>
+          <div class="gmbadge">Packshot · IA</div>
         </div>
       </div>
 
-      <!-- Linha 4: 2 vídeos lado a lado -->
       <div class="grow grow-2">
         <div class="gmedia is-video">
           <video controls preload="metadata" playsinline>
             <source src="media/video2.mp4" type="video/mp4">
           </video>
+          <div class="gmbadge">UGC · IA</div>
         </div>
         <div class="gmedia is-video">
           <video controls preload="metadata" playsinline>
             <source src="media/video3.mp4" type="video/mp4">
           </video>
+          <div class="gmbadge">Produto · IA</div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-
-<!-- BENEFITS -->
-<section class="benefits">
-  <div class="si">
-    <div class="stag reveal">Por que este pack</div>
-    <h2 class="sh reveal">Tudo que você precisa,<br>pronto para usar</h2>
-    <ul class="bl">
-      <li class="reveal d1"><div class="bico">⚡</div><div class="btxt"><h4>Acesso imediato, sem curva de aprendizado</h4><p>Abra o PDF, copie o prompt, cole na ferramenta. Resultado em minutos — não em horas.</p></div></li>
-      <li class="reveal d2"><div class="bico">📸</div><div class="btxt"><h4>Fotorrealismo de verdade</h4><p>Cada prompt especifica câmera, lente e iluminação. Sem o visual plastificado de IA genérica.</p></div></li>
-      <li class="reveal d3"><div class="bico">🎬</div><div class="btxt"><h4>Vídeos com estrutura cinematográfica</h4><p>Timestamps, movimentos de câmera, áudio e constraints — nível de produção real.</p></div></li>
-      <li class="reveal d4"><div class="bico">🔧</div><div class="btxt"><h4>Personalizável para qualquer nicho</h4><p>Campos em [COLCHETES] para adaptar ao seu produto. Inclui guia com ChatGPT — 6 comandos.</p></div></li>
-      <li class="reveal d1"><div class="bico">🌐</div><div class="btxt"><h4>Funciona com as melhores ferramentas</h4><p>GPT Image, Seedance, Kling 3.0, Google Flow — cada categoria indica qual usar.</p></div></li>
-      <li class="reveal d2"><div class="bico">🚀</div><div class="btxt"><h4>Formatos que dominam o feed agora</h4><p>FOOH, UGC, Drone, Micro-Cinema — estilos que estão performando melhor em 2025.</p></div></li>
-    </ul>
-  </div>
-</section>
-
-<!-- PREVIEW -->
-<section class="preview">
-  <div class="si">
-    <div class="stag reveal">Prévia dos prompts</div>
-    <h2 class="sh reveal">Veja o nível de detalhe<br>de cada prompt</h2>
-    <p class="ss reveal">Instruções técnicas completas — câmera, luz, movimento e mais. Não são prompts genéricos.</p>
-    <div class="pvg">
-      <div class="pvcard reveal d1"><div class="pvh"><span class="pn pni">#01</span><span class="pvt">Hero Shot Estúdio Premium</span></div><div class="pvb">Ultra-photorealistic hero shot of <strong>@image1</strong> against pure white seamless studio. Shot on <strong>Phase One XF IQ4 150MP</strong>, 120mm macro, f/8. Three-point lighting — key, fill and rim. Perfect shadows, specular highlights on every surface. Commercial product photography quality…</div></div>
-      <div class="pvcard reveal d2"><div class="pvh"><span class="pn pnv">#156</span><span class="pvt">UGC Bebida — Review Autêntico</span></div><div class="pvb">[0–3s] <strong>@image1</strong>: <strong>"Gente, achei esse produto e precisei compartilhar."</strong><br>[3–7s] Close-up das mãos abrindo o produto.<br>[7–12s] Primeiro uso. Olhos arregalados: "Que isso?"<br>CAMERA: iPhone 16 Pro · Handheld · Natural light…</div></div>
-      <div class="pvcard reveal d3"><div class="pvh"><span class="pn pni">#141</span><span class="pvt">Post Black Friday / Promo</span></div><div class="pvb">Campos: <strong>[DESCONTO]</strong> "50% OFF" · <strong>[CTA]</strong> "Compre Agora"<br>——<br>High-impact post com <strong>@image1</strong>. Bold 3D text [DESCONTO]. Dark bg + neon accents. Urgency design. Button graphic: [CTA]. Ultra-photorealistic product integration…</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- TOOLS -->
-<section class="tools-sec">
-  <div class="si">
-    <div class="stag reveal">Ferramentas compatíveis</div>
-    <h2 class="sh reveal">Cada prompt indica<br>qual ferramenta usar</h2>
-    <div class="tc-grid">
-      <div class="tc reveal d1"><div class="tico">🖼️</div><h4>GPT Image</h4><p>Produto e pessoas com identidade preservada</p><div class="tuse">Imagens</div></div>
-      <div class="tc reveal d2"><div class="tico">🍌</div><h4>Nano Banana</h4><p>Fotorrealismo e qualidade máxima</p><div class="tuse">Imagens</div></div>
-      <div class="tc reveal d3"><div class="tico">🎬</div><h4>Seedance 2.0</h4><p>UGC, lifestyle, cinematic e produto</p><div class="tuse">Vídeos</div></div>
-      <div class="tc reveal d4"><div class="tico">🎥</div><h4>Seedance 2.5</h4><p>FOOH, VFX, épico e grande escala</p><div class="tuse">Vídeos</div></div>
-      <div class="tc reveal d5"><div class="tico">⚡</div><h4>Kling 3.0</h4><p>Cinematic, fantasia, sci-fi e ação</p><div class="tuse">Vídeos</div></div>
-      <div class="tc reveal d1"><div class="tico">🌊</div><h4>Google Flow</h4><p>Lifestyle, rotina e tutoriais</p><div class="tuse">Vídeos</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- AUTHOR -->
-<section class="author-sec">
-  <div class="si">
-    <div class="au-inner">
-      <img src="dg_foto.webp" alt="DG — Douglas Ferreira" class="au-photo reveal">
-      <div class="au-content">
-        <div class="stag reveal">Quem criou este pack</div>
-        <h2 class="reveal">DG</h2>
-        <span class="au-handle reveal">Douglas Ferreira &nbsp;·&nbsp; <a href="https://instagram.com/dg_vfx" target="_blank" style="color:var(--blue);text-decoration:none">@dg_vfx</a></span>
-        <p class="reveal">Criador de conteúdo especializado em IA, VFX e produção visual. Desenvolvi este pack após centenas de horas testando prompts nas principais ferramentas de IA do mercado.</p>
-        <p class="reveal">Cada prompt foi refinado para entregar qualidade profissional — o tipo de resultado que a maioria dos criadores passa semanas tentando alcançar.</p>
-        <p class="reveal" style="color:var(--blue);font-weight:700">Este pack é o atalho que eu queria ter quando comecei.</p>
+<!-- ── 3. HOW IT WORKS ── -->
+<section class="how-it-works">
+  <div class="si tc">
+    <div class="stag reveal">Como funciona</div>
+    <h2 class="sh reveal">Simples assim</h2>
+    <p class="ss reveal" style="margin:0 auto 0">Três passos do prompt ao resultado profissional.</p>
+    <div class="hiw-grid reveal d2">
+      <div class="hiw-step">
+        <div class="hiw-num">Passo 01</div>
+        <span class="hiw-icon">📋</span>
+        <h3>Abra o CRIA</h3>
+        <p>Escolha a categoria e copie o prompt certo para o seu objetivo — produto, vídeo, retrato, FOOH...</p>
+      </div>
+      <div class="hiw-arrow">→</div>
+      <div class="hiw-step">
+        <div class="hiw-num">Passo 02</div>
+        <span class="hiw-icon">🤖</span>
+        <h3>Cole na IA com sua foto</h3>
+        <p>Use <span class="hiw-code">@image1</span> para referenciar seu produto ou pessoa. A IA faz o resto.</p>
+      </div>
+      <div class="hiw-arrow">→</div>
+      <div class="hiw-step">
+        <div class="hiw-num">Passo 03</div>
+        <span class="hiw-icon">📱</span>
+        <h3>Publique o resultado</h3>
+        <p>Conteúdo profissional gerado em segundos. Pronto para Instagram, TikTok, campanhas e clientes.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
+<!-- ── 4. PROBLEM ── -->
+<section class="problem">
+  <div class="si">
+    <div class="stag reveal">Você se identifica?</div>
+    <h2 class="sh reveal">Por que a maioria <span class="grad-text">não consegue resultados</span> com IA</h2>
+    <div class="prob-grid">
+      <div class="prob-card reveal d1">
+        <div class="prob-icon">😤</div>
+        <h4>Horas tentando prompts genéricos</h4>
+        <p>Você escreve, ajusta, reescreve... e o resultado ainda sai medíocre. Sem consistência, sem padrão.</p>
+      </div>
+      <div class="prob-card reveal d2">
+        <div class="prob-icon">📉</div>
+        <h4>Resultados inconsistentes</h4>
+        <p>Um dia sai bom, no outro horrível. Você nunca sabe o que vai acontecer antes de gerar.</p>
+      </div>
+      <div class="prob-card reveal d3">
+        <div class="prob-icon">⏰</div>
+        <h4>Tempo demais para pouco conteúdo</h4>
+        <p>O processo virou trabalho. Em vez de criar, você fica debugando prompt em vez de publicar.</p>
+      </div>
+      <div class="prob-card reveal d4">
+        <div class="prob-icon">🔍</div>
+        <h4>Não sabe qual ferramenta usar</h4>
+        <p>GPT Image, Seedance, Kling, Flow... muitas opções e ninguém explica qual usar para cada objetivo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 5. INSIDE ── -->
+<section class="inside">
+  <div class="si">
+    <div class="stag reveal">O que está incluído</div>
+    <h2 class="sh reveal">300 prompts. <span class="grad-text">31 categorias.</span></h2>
+    <p class="ss reveal">Organizados por objetivo — você encontra exatamente o que precisa em segundos.</p>
+    <div class="inc-split">
+      <div class="inc-half img-half reveal d1">
+        <span class="inc-half-icon">🖼️</span>
+        <div class="inc-half-num">150</div>
+        <h3>Prompts de Imagem</h3>
+        <p>Packshots, retratos, lifestyle, produto em ambiente e muito mais — com ferramenta indicada para cada um.</p>
+        <div class="inc-cats">
+          <span class="inc-cat">Produto s/ Fundo</span>
+          <span class="inc-cat">Packshot Cinemático</span>
+          <span class="inc-cat">Retrato</span>
+          <span class="inc-cat">Lifestyle</span>
+          <span class="inc-cat">Macro</span>
+          <span class="inc-cat">Neon & Fantasia</span>
+          <span class="inc-cat">+ mais</span>
+        </div>
+      </div>
+      <div class="inc-half vid-half reveal d2">
+        <span class="inc-half-icon">🎬</span>
+        <div class="inc-half-num">150</div>
+        <h3>Prompts de Vídeo</h3>
+        <p>UGC, FOOH, Cinematic, VFX, Sci-Fi e muito mais — prontos para Seedance, Kling e Google Flow.</p>
+        <div class="inc-cats">
+          <span class="inc-cat">UGC & Lifestyle</span>
+          <span class="inc-cat">FOOH & VFX</span>
+          <span class="inc-cat">Cinematic</span>
+          <span class="inc-cat">Packshot</span>
+          <span class="inc-cat">Fantasia & Sci-Fi</span>
+          <span class="inc-cat">+ mais</span>
+        </div>
+      </div>
+    </div>
+    <p class="inc-more reveal">31 categorias no total &nbsp;·&nbsp; <span>ferramenta ideal indicada em cada prompt</span></p>
+  </div>
+</section>
+
+<!-- ── 6. BENEFITS ── -->
+<section class="benefits">
+  <div class="si">
+    <div class="stag reveal">Por que o CRIA</div>
+    <h2 class="sh reveal">Feito para <span class="grad-text">quem cria de verdade</span></h2>
+    <div class="ben-grid">
+      <div class="ben-item reveal d1"><div class="ben-ico">⚡</div><h4>Pronto para usar agora</h4><p>Sem setup, sem configuração. Abra o PDF, copie, cole, gere.</p></div>
+      <div class="ben-item reveal d2"><div class="ben-ico">🎯</div><h4>Prompts testados na prática</h4><p>Centenas de horas de testes reais. Só o que funciona entrou no pack.</p></div>
+      <div class="ben-item reveal d3"><div class="ben-ico">📐</div><h4>Organizado por objetivo</h4><p>31 categorias com nomes claros. Você sabe onde encontrar cada tipo.</p></div>
+      <div class="ben-item reveal d4"><div class="ben-ico">🔁</div><h4>Funciona para qualquer produto</h4><p>Use @image1 para referenciar seu produto ou pessoa. Adapta para qualquer nicho.</p></div>
+      <div class="ben-item reveal d5"><div class="ben-ico">📱</div><h4>Para clientes também</h4><p>Uso pessoal e profissional incluídos. Atenda clientes com qualidade consistente.</p></div>
+      <div class="ben-item reveal d6"><div class="ben-ico">♾️</div><h4>Atualizações inclusas</h4><p>Compra única. Novas versões chegam gratuitamente para quem já tem.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 7. AUTHOR ── -->
+<section class="author-sec">
+  <div class="si">
+    <div class="au-inner reveal">
+      <img src="dg_foto.webp" alt="DG — Douglas Ferreira" class="au-photo">
+      <div class="au-content">
+        <div class="stag" style="margin-bottom:16px">Quem criou este pack</div>
+        <h2>DG</h2>
+        <span class="au-handle">Douglas Ferreira &nbsp;·&nbsp; <a href="https://instagram.com/dg_vfx" target="_blank">@dg_vfx</a></span>
+        <p>Criador de conteúdo especializado em IA, VFX e produção visual. Desenvolvi este pack após centenas de horas testando prompts nas principais ferramentas de IA do mercado.</p>
+        <p>Cada prompt foi refinado para entregar qualidade profissional — o tipo de resultado que a maioria dos criadores passa semanas tentando alcançar.</p>
+        <p style="color:var(--blue);font-weight:700">Este pack é o atalho que eu queria ter quando comecei.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 8. PRICING + TIMER ── -->
 <section class="pricing" id="comprar">
   <div class="si">
-    <div class="stag reveal">Investimento</div>
-    <h2 class="sh reveal">Comece a criar hoje</h2>
+    <div class="stag reveal" style="display:block;text-align:center">Investimento</div>
+    <h2 class="sh tc reveal">Comece a criar hoje</h2>
 
-    <!-- TIMER -->
     <div class="timer-wrap reveal">
       <div class="timer-label">⏳ Oferta de lançamento expira em:</div>
       <div class="timer-boxes">
@@ -487,44 +523,46 @@ footer a{color:var(--blue);text-decoration:none}
     <div class="pbox reveal">
       <div class="pbadge">🔥 Oferta de Lançamento</div>
       <h3>CRIA — 300 Prompts de IA</h3>
-      <div style="font-size:15px;color:var(--gray);text-decoration:line-through;margin-bottom:4px;letter-spacing:0.3px">de R$&nbsp;97</div>
+      <div style="font-size:15px;color:var(--gray);text-decoration:line-through;margin-bottom:4px">de R$&nbsp;97</div>
       <div class="pmain"><sup>R$</sup>47</div>
       <div class="pnote">ou <strong style="color:var(--white)">11x de R$&nbsp;5,22</strong> &nbsp;·&nbsp; pagamento único à vista &nbsp;·&nbsp; sem mensalidade</div>
       <ul class="pinc">
         <li><span>✅</span><div><strong>300 prompts prontos</strong> para imagens e vídeos</div></li>
         <li><span>✅</span><div><strong>31 categorias</strong> organizadas por estilo e objetivo</div></li>
         <li><span>✅</span><div><strong>Guia de adaptação</strong> com ChatGPT — 6 comandos</div></li>
-        <li><span>✅</span><div><strong>6 ferramentas</strong> indicadas por categoria</div></li>
+        <li><span>✅</span><div><strong>Ferramenta indicada</strong> por categoria</div></li>
         <li><span>✅</span><div><strong>Acesso imediato</strong> após a compra</div></li>
         <li><span>✅</span><div><strong>Atualizações</strong> inclusas para compradores</div></li>
       </ul>
       <a href="https://pay.kiwify.com.br/7fTgGYD" target="_blank" class="btn-buy">Quero o CRIA Agora →</a>
-      <p class="pguarantee">🔒 Compra 100% segura &nbsp;·&nbsp; Acesso imediato</p>
+      <p class="psafe">🔒 Pagamento seguro via Kiwify &nbsp;·&nbsp; Acesso imediato</p>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- ── 9. FAQ ── -->
 <section class="faq-sec">
-  <div class="si" style="text-align:center">
-    <div class="stag reveal">Perguntas frequentes</div>
-    <h2 class="sh reveal">Ficou alguma dúvida?</h2>
-  </div>
-  <div class="fq-list">
-    <div class="fq reveal"><div class="fq-q">Preciso ter experiência com IA para usar?</div><div class="fq-a">Não. Os prompts são plug-and-play — copie, cole na ferramenta e gere. Para personalizar, incluímos um guia de adaptação com ChatGPT e 6 comandos prontos.</div></div>
-    <div class="fq reveal"><div class="fq-q">As ferramentas de IA são pagas?</div><div class="fq-a">A escolha da ferramenta é sempre sua — cada prompt indica a opção ideal, mas você decide o que usar. No geral, as ferramentas de <strong style="color:var(--white)">imagem são gratuitas ou têm plano free</strong> com boa capacidade. Já as de <strong style="color:var(--white)">vídeo, na maioria, exigem um plano pago</strong> para gerar em qualidade profissional. O CRIA funciona com qualquer ferramenta compatível.</div></div>
-    <div class="fq reveal"><div class="fq-q">Como recebo o pack após a compra?</div><div class="fq-a">Assim que o pagamento for confirmado, você recebe acesso imediato ao PDF. É só baixar e começar a usar — sem espera.</div></div>
-    <div class="fq reveal"><div class="fq-q">Os prompts funcionam com qualquer nicho?</div><div class="fq-a">Sim. Os prompts usam @image1 para referenciar seu produto ou pessoa. Funciona para moda, gastronomia, beleza, tech, fitness, lifestyle e qualquer outro nicho.</div></div>
-    <div class="fq reveal"><div class="fq-q">Posso usar para clientes também?</div><div class="fq-a">Sim. Uso pessoal e profissional estão incluídos — seus projetos e projetos de clientes.</div></div>
-    <div class="fq reveal"><div class="fq-q">O pack vai ser atualizado?</div><div class="fq-a">Sim. Quem compra agora recebe todas as atualizações futuras sem custo adicional.</div></div>
+  <div class="si">
+    <div class="stag reveal" style="display:block;text-align:center">Dúvidas</div>
+    <h2 class="sh tc reveal">Perguntas frequentes</h2>
+    <div class="faq-wrap">
+      <div class="fq reveal"><div class="fq-q">O que exatamente está incluído no CRIA?</div><div class="fq-a">300 prompts em formato PDF — 150 para imagens e 150 para vídeos, organizados em 31 categorias. Cada prompt inclui a ferramenta ideal indicada e um campo @image1 para você referenciar seu produto ou pessoa.</div></div>
+      <div class="fq reveal"><div class="fq-q">Precisa saber escrever prompts para usar?</div><div class="fq-a">Não. Os prompts já estão prontos e testados. Você só copia, substitui @image1 pela sua foto ou produto, e cola na ferramenta de IA. É literalmente esse o processo.</div></div>
+      <div class="fq reveal"><div class="fq-q">Funciona para qualquer nicho?</div><div class="fq-a">Sim. Os prompts usam @image1 para referenciar seu produto ou pessoa. Funciona para moda, gastronomia, beleza, tech, fitness, lifestyle e qualquer outro nicho.</div></div>
+      <div class="fq reveal"><div class="fq-q">As ferramentas são pagas?</div><div class="fq-a">A escolha da ferramenta é sempre sua — cada prompt indica a opção ideal, mas você decide o que usar. No geral, as ferramentas de imagem são gratuitas ou têm plano free com boa capacidade. Já as de vídeo, na maioria, exigem um plano pago para gerar em qualidade profissional. O CRIA funciona com qualquer ferramenta compatível.</div></div>
+      <div class="fq reveal"><div class="fq-q">Posso usar para clientes também?</div><div class="fq-a">Sim. Uso pessoal e profissional estão incluídos — seus projetos e projetos de clientes.</div></div>
+      <div class="fq reveal"><div class="fq-q">O pack vai ser atualizado?</div><div class="fq-a">Sim. Quem compra agora recebe todas as atualizações futuras sem custo adicional.</div></div>
+    </div>
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="final-cta reveal">
-  <h2>Pronto para <span style="color:var(--blue)">CRIA</span>r conteúdo<br>que chama atenção de verdade?</h2>
-  <p>300 prompts &nbsp;·&nbsp; 31 categorias &nbsp;·&nbsp; Acesso imediato</p>
-  <a href="https://pay.kiwify.com.br/7fTgGYD" target="_blank" class="btn-primary">Quero o CRIA Agora &nbsp;→</a>
+<!-- ── 10. FINAL CTA ── -->
+<section class="final-cta">
+  <div style="position:relative;z-index:1">
+    <h2 class="reveal">Pronto para <span class="grad-text">CRIA</span>r conteúdo<br>que chama atenção de verdade?</h2>
+    <p class="reveal">300 prompts &nbsp;·&nbsp; 31 categorias &nbsp;·&nbsp; Acesso imediato</p>
+    <a href="https://pay.kiwify.com.br/7fTgGYD" target="_blank" class="btn-primary reveal">Quero o CRIA Agora &nbsp;→</a>
+  </div>
 </section>
 
 <footer>
@@ -532,7 +570,7 @@ footer a{color:var(--blue);text-decoration:none}
   <p>© 2025 Douglas Ferreira &nbsp;·&nbsp; Todos os direitos reservados</p>
 </footer>
 
-<!-- STICKY BUY BUTTON -->
+<!-- STICKY BAR -->
 <div class="sticky-cta" id="stickyCta">
   <span class="sc-text">🔥 <strong>R$&nbsp;47</strong> à vista <span style="opacity:.5;font-size:11px">ou 11x de R$5,22</span> &nbsp;<span style="text-decoration:line-through;opacity:.4;font-size:11px">R$97</span></span>
   <a href="https://pay.kiwify.com.br/7fTgGYD" target="_blank" class="sc-btn">Quero o CRIA Agora →</a>
@@ -554,7 +592,7 @@ document.querySelectorAll('.fq').forEach(fq => {
   });
 });
 
-// Sticky CTA — show after hero, hide when pricing section is visible
+// Sticky CTA
 const stickyCta = document.getElementById('stickyCta');
 const hero = document.querySelector('.hero');
 const pricing = document.getElementById('comprar');
@@ -568,10 +606,11 @@ const stickyObs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 if (hero) stickyObs.observe(hero);
 if (pricing) stickyObs.observe(pricing);
-// ── COUNTDOWN TIMER ──
+
+// Countdown timer
 (function() {
   const KEY = 'cria_timer_end';
-  const DURATION = 24 * 60 * 60 * 1000; // 24 horas
+  const DURATION = 24 * 60 * 60 * 1000;
   let end = parseInt(localStorage.getItem(KEY));
   if (!end || end < Date.now()) {
     end = Date.now() + DURATION;
@@ -580,18 +619,13 @@ if (pricing) stickyObs.observe(pricing);
   function pad(n) { return String(n).padStart(2, '0'); }
   function tick() {
     const diff = Math.max(0, end - Date.now());
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    document.getElementById('th').textContent = pad(h);
-    document.getElementById('tm').textContent = pad(m);
-    document.getElementById('ts').textContent = pad(s);
+    document.getElementById('th').textContent = pad(Math.floor(diff / 3600000));
+    document.getElementById('tm').textContent = pad(Math.floor((diff % 3600000) / 60000));
+    document.getElementById('ts').textContent = pad(Math.floor((diff % 60000) / 1000));
     if (diff > 0) setTimeout(tick, 1000);
   }
   tick();
 })();
 </script>
-
 </body>
 </html>
-
