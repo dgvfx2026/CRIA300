@@ -233,7 +233,23 @@ section{padding:96px 0}
 footer{background:var(--dark);border-top:1px solid var(--glass-b);padding:36px 24px;text-align:center;font-size:13px;color:var(--lgray);line-height:2.2}
 footer a{color:var(--blue);text-decoration:none}
 
+/* ── WHATSAPP BUTTON ── */
+.wa-btn{position:fixed;bottom:80px;right:24px;z-index:998;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.45);text-decoration:none;transition:transform .2s,box-shadow .2s;animation:wa-pulse 2.5s ease-in-out infinite}
+.wa-btn:hover{transform:scale(1.1);box-shadow:0 6px 32px rgba(37,211,102,0.6)}
+.wa-btn svg{width:30px;height:30px;fill:#fff}
+.wa-tooltip{position:absolute;right:68px;background:rgba(0,0,0,0.85);color:#fff;font-size:12px;font-weight:600;white-space:nowrap;padding:6px 12px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s;backdrop-filter:blur(8px)}
+.wa-btn:hover .wa-tooltip{opacity:1}
+@keyframes wa-pulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.45)}50%{box-shadow:0 4px 36px rgba(37,211,102,0.7)}}
+@media(max-width:580px){.wa-btn{bottom:100px;right:16px;width:50px;height:50px}.wa-btn svg{width:26px;height:26px}}
+
+/* ── GUARANTEE SEAL ── */
+.guarantee{display:flex;align-items:center;gap:16px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:16px;padding:18px 22px;margin-top:20px;text-align:left}
+.guarantee-icon{font-size:36px;flex-shrink:0}
+.guarantee h5{font-size:14px;font-weight:700;color:var(--white);margin-bottom:3px}
+.guarantee p{font-size:12px;color:var(--lgray);line-height:1.5;margin:0}
+
 /* ── STICKY CTA ── */
+
 .sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(10,14,20,0.97);backdrop-filter:blur(20px);border-top:1px solid rgba(59,130,246,0.2);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:0 -6px 40px rgba(0,0,0,0.5)}
 .sticky-cta.show{transform:translateY(0)}
 .sc-text{color:rgba(255,255,255,0.7);font-size:13px;white-space:nowrap}
@@ -399,37 +415,8 @@ footer a{color:var(--blue);text-decoration:none}
   </div>
 </section>
 
-<!-- ── 4. PROBLEM ── -->
-<section class="problem">
-  <div class="si">
-    <div class="stag reveal">Você se identifica?</div>
-    <h2 class="sh reveal">Por que a maioria <span class="grad-text">não consegue resultados</span> com IA</h2>
-    <div class="prob-grid">
-      <div class="prob-card reveal d1">
-        <div class="prob-icon">😤</div>
-        <h4>Horas tentando prompts genéricos</h4>
-        <p>Você escreve, ajusta, reescreve... e o resultado ainda sai medíocre. Sem consistência, sem padrão.</p>
-      </div>
-      <div class="prob-card reveal d2">
-        <div class="prob-icon">📉</div>
-        <h4>Resultados inconsistentes</h4>
-        <p>Um dia sai bom, no outro horrível. Você nunca sabe o que vai acontecer antes de gerar.</p>
-      </div>
-      <div class="prob-card reveal d3">
-        <div class="prob-icon">⏰</div>
-        <h4>Tempo demais para pouco conteúdo</h4>
-        <p>O processo virou trabalho. Em vez de criar, você fica debugando prompt em vez de publicar.</p>
-      </div>
-      <div class="prob-card reveal d4">
-        <div class="prob-icon">🔍</div>
-        <h4>Não sabe qual ferramenta usar</h4>
-        <p>GPT Image, Seedance, Kling, Flow... muitas opções e ninguém explica qual usar para cada objetivo.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ── 5. INSIDE ── -->
+<!-- ── 4. INSIDE ── -->
 <section class="inside">
   <div class="si">
     <div class="stag reveal">O que está incluído</div>
@@ -486,24 +473,7 @@ footer a{color:var(--blue);text-decoration:none}
   </div>
 </section>
 
-<!-- ── 7. AUTHOR ── -->
-<section class="author-sec">
-  <div class="si">
-    <div class="au-inner reveal">
-      <img src="dg_foto.webp" alt="DG — Douglas Ferreira" class="au-photo">
-      <div class="au-content">
-        <div class="stag" style="margin-bottom:16px">Quem criou este pack</div>
-        <h2>DG</h2>
-        <span class="au-handle">Douglas Ferreira &nbsp;·&nbsp; <a href="https://instagram.com/dg_vfx" target="_blank">@dg_vfx</a></span>
-        <p>Criador de conteúdo especializado em IA, VFX e produção visual. Desenvolvi este pack após centenas de horas testando prompts nas principais ferramentas de IA do mercado.</p>
-        <p>Cada prompt foi refinado para entregar qualidade profissional — o tipo de resultado que a maioria dos criadores passa semanas tentando alcançar.</p>
-        <p style="color:var(--blue);font-weight:700">Este pack é o atalho que eu queria ter quando comecei.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── 8. PRICING + TIMER ── -->
+<!-- ── 7. PRICING + TIMER ── -->
 <section class="pricing" id="comprar">
   <div class="si">
     <div class="stag reveal" style="display:block;text-align:center">Investimento</div>
@@ -536,11 +506,18 @@ footer a{color:var(--blue);text-decoration:none}
       </ul>
       <a href="https://pay.kiwify.com.br/7fTgGYD" target="_blank" class="btn-buy">Quero o CRIA Agora →</a>
       <p class="psafe">🔒 Pagamento seguro via Kiwify &nbsp;·&nbsp; Acesso imediato</p>
+      <div class="guarantee">
+        <div class="guarantee-icon">🛡️</div>
+        <div>
+          <h5>Garantia de 7 dias</h5>
+          <p>Se por qualquer motivo você não ficar satisfeito, devolvemos 100% do seu dinheiro. Sem perguntas.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ── 9. FAQ ── -->
+<!-- ── 8. FAQ ── -->
 <section class="faq-sec">
   <div class="si">
     <div class="stag reveal" style="display:block;text-align:center">Dúvidas</div>
@@ -552,6 +529,23 @@ footer a{color:var(--blue);text-decoration:none}
       <div class="fq reveal"><div class="fq-q">As ferramentas são pagas?</div><div class="fq-a">A escolha da ferramenta é sempre sua — cada prompt indica a opção ideal, mas você decide o que usar. No geral, as ferramentas de imagem são gratuitas ou têm plano free com boa capacidade. Já as de vídeo, na maioria, exigem um plano pago para gerar em qualidade profissional. O CRIA funciona com qualquer ferramenta compatível.</div></div>
       <div class="fq reveal"><div class="fq-q">Posso usar para clientes também?</div><div class="fq-a">Sim. Uso pessoal e profissional estão incluídos — seus projetos e projetos de clientes.</div></div>
       <div class="fq reveal"><div class="fq-q">O pack vai ser atualizado?</div><div class="fq-a">Sim. Quem compra agora recebe todas as atualizações futuras sem custo adicional.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 9. AUTHOR ── -->
+<section class="author-sec">
+  <div class="si">
+    <div class="au-inner reveal">
+      <img src="dg_foto.webp" alt="DG — Douglas Ferreira" class="au-photo">
+      <div class="au-content">
+        <div class="stag" style="margin-bottom:16px">Quem criou este pack</div>
+        <h2>DG</h2>
+        <span class="au-handle">Douglas Ferreira &nbsp;·&nbsp; <a href="https://instagram.com/dg_vfx" target="_blank">@dg_vfx</a></span>
+        <p>Criador de conteúdo especializado em IA, VFX e produção visual. Desenvolvi este pack após centenas de horas testando prompts nas principais ferramentas de IA do mercado.</p>
+        <p>Cada prompt foi refinado para entregar qualidade profissional — o tipo de resultado que a maioria dos criadores passa semanas tentando alcançar.</p>
+        <p style="color:var(--blue);font-weight:700">Este pack é o atalho que eu queria ter quando comecei.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -569,6 +563,12 @@ footer a{color:var(--blue);text-decoration:none}
   <p><strong style="color:var(--white);letter-spacing:1px">CRIA</strong> &nbsp;·&nbsp; 300 Prompts de IA para Criadores &nbsp;·&nbsp; por <a href="https://instagram.com/dg_vfx" target="_blank">@dg_vfx</a></p>
   <p>© 2025 Douglas Ferreira &nbsp;·&nbsp; Todos os direitos reservados</p>
 </footer>
+
+<!-- WHATSAPP BUTTON -->
+<a href="https://wa.me/555180328211?text=Oi!%20Tenho%20uma%20d%C3%BAvida%20sobre%20o%20CRIA%20%F0%9F%91%8B" target="_blank" class="wa-btn" aria-label="Falar no WhatsApp">
+  <span class="wa-tooltip">Dúvidas? Fale comigo</span>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
 <!-- STICKY BAR -->
 <div class="sticky-cta" id="stickyCta">
