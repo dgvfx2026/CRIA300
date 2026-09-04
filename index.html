@@ -291,6 +291,8 @@ footer a{color:var(--blue);text-decoration:none}
   .hc:nth-child(2){width:115px;height:148px}
   .hc:nth-child(3){width:100px;height:128px}
 }
+
+.gal-grid{display:grid;gap:8px}.gal-imgs{grid-template-columns:repeat(4,1fr)}.gal-vids{grid-template-columns:repeat(5,1fr);margin-top:8px}.gal-cell{border-radius:18px;overflow:hidden;background:var(--dark3);transition:transform .4s ease,box-shadow .35s ease}.gal-cell:hover{transform:scale(1.025);box-shadow:0 10px 44px rgba(59,130,246,0.22)}.gal-imgs .gal-cell{aspect-ratio:1/1}.gal-vids .gal-cell{aspect-ratio:9/16}.gal-cell img,.gal-cell video{width:100%;height:100%;object-fit:cover;display:block}.gal-cell video{background:#000}@media(max-width:900px){.gal-imgs{grid-template-columns:repeat(3,1fr)}.gal-vids{grid-template-columns:repeat(3,1fr)}}@media(max-width:580px){.gal-imgs{grid-template-columns:repeat(2,1fr)}.gal-vids{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -317,72 +319,45 @@ footer a{color:var(--blue);text-decoration:none}
     <p class="hero-note reveal d5">150 imagens &nbsp;·&nbsp; 150 vídeos &nbsp;·&nbsp; 31 categorias</p>
   </div>
 </section>
-
 <!-- ── 2. GALLERY ── -->
 <section class="gallery">
-  <div class="si">
-    <div class="stag reveal">Resultados reais</div>
-    <h2 class="sh reveal">O que você vai <span class="grad-text">criar hoje</span></h2>
-    <p class="ss tc reveal" style="margin:0 auto 52px">Imagens e vídeos gerados usando os prompts exatamente como estão no PDF — sem edição adicional.</p>
-
-    <div class="gal-wrap reveal">
-      <div class="grow grow-12">
-        <div class="gmedia h-lg">
-          <img src="https://lh3.googleusercontent.com/d/1CK__sXvBUAkg2Y6lwmZbfHXDsQCF6fTQ" alt="Criado com CRIA" loading="lazy">
-          <div class="gmoverlay"></div>
-          <div class="gmbadge">Produto · IA</div>
-        </div>
-        <div class="gmedia h-lg">
-          <img src="https://lh3.googleusercontent.com/d/1FwmXCAFc1IXsH_T0sPS4O_mRJ_3gpPpP" alt="Criado com CRIA" loading="lazy">
-          <div class="gmoverlay"></div>
-          <div class="gmbadge">Retrato · IA</div>
-        </div>
-      </div>
-
-      <div class="grow grow-1">
-        <div class="gmedia is-video">
-          <video controls preload="metadata" playsinline>
-            <source src="media/video1.mp4" type="video/mp4">
-          </video>
-          <div class="gmbadge">Vídeo · IA</div>
-        </div>
-      </div>
-
-      <div class="grow grow-3">
-        <div class="gmedia h-md">
-          <img src="https://lh3.googleusercontent.com/d/1lMNrNrR3N31ZV9eNUAUYNcIc51iUdMJj" alt="Criado com CRIA" loading="lazy">
-          <div class="gmoverlay"></div>
-          <div class="gmbadge">Hero Shot · IA</div>
-        </div>
-        <div class="gmedia h-md">
-          <img src="https://lh3.googleusercontent.com/d/1vNXoFl-KfebRScydssHUTcFN0FHlcJB-" alt="Criado com CRIA" loading="lazy">
-          <div class="gmoverlay"></div>
-          <div class="gmbadge">Macro · IA</div>
-        </div>
-        <div class="gmedia h-md">
-          <img src="https://lh3.googleusercontent.com/d/1va6Ipwc_6ViejyuJPOcOXuAu3z9q1ri_" alt="Criado com CRIA" loading="lazy">
-          <div class="gmoverlay"></div>
-          <div class="gmbadge">Packshot · IA</div>
-        </div>
-      </div>
-
-      <div class="grow grow-2">
-        <div class="gmedia is-video">
-          <video controls preload="metadata" playsinline>
-            <source src="media/video2.mp4" type="video/mp4">
-          </video>
-          <div class="gmbadge">UGC · IA</div>
-        </div>
-        <div class="gmedia is-video">
-          <video controls preload="metadata" playsinline>
-            <source src="media/video3.mp4" type="video/mp4">
-          </video>
-          <div class="gmbadge">Produto · IA</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="si">
+<div class="stag reveal">Resultados reais</div>
+<h2 class="sh reveal">O que voc&#234; vai <span class="grad-text">criar hoje</span></h2>
+<p class="ss tc reveal" style="margin:0 auto 40px">Imagens e v&#237;deos gerados com os prompts do pack.</p>
+<div class="gal-grid gal-imgs reveal">
+<div class="gal-cell"><img src="https://lh3.googleusercontent.com/d/1CK__sXvBUAkg2Y6lwmZbfHXDsQCF6fTQ" alt="CRIA" loading="lazy"></div>
+<div class="gal-cell"><img src="https://lh3.googleusercontent.com/d/1va6Ipwc_6ViejyuJPOcOXuAu3z9q1ri_" alt="CRIA" loading="lazy"></div>
+<div class="gal-cell"><img src="https://lh3.googleusercontent.com/d/1lMNrNrR3N31ZV9eNUAUYNcIc51iUdMJj" alt="CRIA" loading="lazy"></div>
+<div class="gal-cell"><img src="https://lh3.googleusercontent.com/d/1FwmXCAFc1IXsH_T0sPS4O_mRJ_3gpPpP" alt="CRIA" loading="lazy"></div>
+<div class="gal-cell"><img src="https://lh3.googleusercontent.com/d/1rA4wFTp7dkWiVQZ3wlUdJ-d1qwb3OCqM" alt="CRIA" loading="lazy"></div>
+<div class="gal-cell"><img src="https://lh3.googleusercontent.com/d/14W5QtHUpY6vATbIuFteiUgnTcYQVctEb" alt="CRIA" loading="lazy"></div>
+<div class="gal-cell"><img src="https://lh3.googleusercontent.com/d/1WZxGYZxp-QQY9Joxp3KwoiFFGvOU-8H0" alt="CRIA" loading="lazy"></div>
+<div class="gal-cell"><img src="https://lh3.googleusercontent.com/d/1luYhn4MWApib-LgA_tlgL6ALct3iZEkk" alt="CRIA" loading="lazy"></div>
+<div class="gal-cell"><img src="https://lh3.googleusercontent.com/d/1NcZfQQTCNSuLRuuO29_h3hiEbBJyFQEr" alt="CRIA" loading="lazy"></div>
+<div class="gal-cell"><img src="https://lh3.googleusercontent.com/d/1vNXoFl-KfebRScydssHUTcFN0FHlcJB-" alt="CRIA" loading="lazy"></div>
+<div class="gal-cell"><img src="https://lh3.googleusercontent.com/d/18naovYpPOJbYumn_aWFdosUYI-k9qcrL" alt="CRIA" loading="lazy"></div>
+<div class="gal-cell"><img src="https://lh3.googleusercontent.com/d/16dzkRGMYs3IwmHXumZg_ln_Ik7FfCNDt" alt="CRIA" loading="lazy"></div>
+</div>
+<div class="gal-grid gal-vids reveal">
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/fooh_ballantines.webm" type="video/webm"></video></div>
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/fooh_kitkat.webm" type="video/webm"></video></div>
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/fooh_vans.webm" type="video/webm"></video></div>
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/fooh_whey.webm" type="video/webm"></video></div>
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/packshot_redbull.webm" type="video/webm"></video></div>
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/ugc_body_splash.webm" type="video/webm"></video></div>
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/ugc_roupas.webm" type="video/webm"></video></div>
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/ugc_skincare.webm" type="video/webm"></video></div>
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/ugc_unboxing.webm" type="video/webm"></video></div>
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/animacao_gato_robo.webm" type="video/webm"></video></div>
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/cinematic_gato_menina.webm" type="video/webm"></video></div>
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/cinematic_relogio.webm" type="video/webm"></video></div>
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/cinematic_superhero.webm" type="video/webm"></video></div>
+<div class="gal-cell"><video autoplay muted loop playsinline preload="none"><source src="media/cinematic_predio.webm" type="video/webm"></video></div>
+</div>
+</div>
 </section>
+
 
 <!-- ── 3. HOW IT WORKS ── -->
 <section class="how-it-works">
