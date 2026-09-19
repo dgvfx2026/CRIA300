@@ -375,6 +375,33 @@
     // força reflow para a transição CSS funcionar
     overlay.offsetHeight;
     emailInp && emailInp.focus();
+
+    // Countdown 10 minutos
+    const countdownEl = document.getElementById("coupon-countdown");
+    const timerEl     = document.getElementById("coupon-timer");
+    if (!countdownEl) return;
+
+    let seconds = 10 * 60; // 600 segundos
+
+    function tick() {
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      countdownEl.textContent = `${m}:${String(s).padStart(2, "0")}`;
+
+      // Fica vermelho e pisca abaixo de 60s
+      if (timerEl) timerEl.classList.toggle("urgent", seconds <= 60);
+
+      if (seconds <= 0) {
+        clearInterval(countdownInterval);
+        // Popup fecha suavemente ao zerar
+        hidePopup();
+        return;
+      }
+      seconds--;
+    }
+
+    tick(); // exibe imediatamente sem esperar 1s
+    const countdownInterval = setInterval(tick, 1000);
   }
 
   function hidePopup() {
