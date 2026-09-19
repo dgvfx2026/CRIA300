@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
@@ -173,5 +173,43 @@
   <a class="contact-float" href="https://wa.me/555180328211?text=Oi!%20Tenho%20uma%20d%C3%BAvida%20sobre%20o%20CRIA" target="_blank" rel="noopener noreferrer" aria-label="Tirar dúvidas sobre o CRIA no WhatsApp"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg><span>Dúvidas?</span></a>
   <aside class="sticky-cta" id="sticky-cta" aria-label="Resumo da oferta" hidden><div class="container"><div><strong>CRIA <span>R$47</span></strong><small>300 prompts · Compra única</small></div><a class="button button-small" href="#comprar">Quero meu acesso <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a></div></aside>
   <dialog class="media-dialog" id="media-dialog" aria-label="Exemplo ampliado" aria-describedby="dialog-caption"><button class="dialog-close" type="button" aria-label="Fechar imagem ampliada">×</button><img id="dialog-image" alt=""><p id="dialog-caption"></p></dialog>
+
+  <!-- POPUP CUPOM -->
+  <div id="coupon-overlay" class="coupon-overlay" role="dialog" aria-modal="true" aria-labelledby="coupon-title" hidden>
+    <div class="coupon-modal">
+      <button class="coupon-close" id="coupon-close" aria-label="Fechar oferta">✕</button>
+
+      <!-- Estado 1: formulário -->
+      <div id="coupon-form-state">
+        <span class="coupon-badge">🎁 Oferta exclusiva</span>
+        <h2 id="coupon-title" class="coupon-title">25% OFF<br><span>só para você.</span></h2>
+        <p class="coupon-desc">Deixe seu e-mail e receba o cupom agora mesmo.</p>
+        <form id="coupon-form" class="coupon-form" novalidate>
+          <div class="coupon-input-wrap">
+            <input type="email" id="coupon-email" name="email" placeholder="seu@email.com" autocomplete="email" required>
+            <button type="submit" class="coupon-submit">
+              Quero meu cupom
+              <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+          <p class="coupon-error" id="coupon-error" hidden>Por favor, insira um e-mail válido.</p>
+          <p class="coupon-privacy">Sem spam. Apenas o cupom e novidades do CRIA.</p>
+        </form>
+      </div>
+
+      <!-- Estado 2: cupom revelado -->
+      <div id="coupon-success-state" hidden>
+        <span class="coupon-badge">✅ Cupom liberado</span>
+        <p class="coupon-desc coupon-success-msg">Use este cupom no checkout:</p>
+        <div class="coupon-code-box">
+          <span id="coupon-code-text">CRIA25</span>
+          <button class="coupon-copy-btn" id="coupon-copy-btn" aria-label="Copiar cupom CRIA25">Copiar</button>
+        </div>
+        <p class="coupon-savings">🎉 Você economiza <strong>R$11,75</strong> — de R$47 por <strong>R$35,25</strong></p>
+        <a class="button coupon-cta-btn" href="#comprar">Usar meu cupom agora →</a>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

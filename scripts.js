@@ -345,3 +345,131 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initialize, { once: true });
   else initialize();
 })();
+
+/* ── COUPON POPUP ── */
+(function () {
+  const STORAGE_KEY = "cria_lead_captured";
+  const SUPABASE_URL = "https://ulapqyoltznvpbygvvik.supabase.co";
+  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVsYXBxeW9sdHpudnBieWd2dmlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5OTE5NjIsImV4cCI6MjEwNDU2Nzk2Mn0.OC4IZqEWeivNDrWNrigUwhZ00_rPTXle7LvTqs2Ii1E";
+
+  // Não mostrar se já capturou o e-mail
+  if (localStorage.getItem(STORAGE_KEY)) return;
+
+  const overlay   = document.getElementById("coupon-overlay");
+  const closeBtn  = document.getElementById("coupon-close");
+  const form      = document.getElementById("coupon-form");
+  const emailInp  = document.getElementById("coupon-email");
+  const errorMsg  = document.getElementById("coupon-error");
+  const formState = document.getElementById("coupon-form-state");
+  const succState = document.getElementById("coupon-success-state");
+  const copyBtn   = document.getElementById("coupon-copy-btn");
+
+  if (!overlay) return;
+
+  let triggered = false;
+
+  function showPopup() {
+    if (triggered) return;
+    triggered = true;
+    overlay.hidden = false;
+    // força reflow para a transição CSS funcionar
+    overlay.offsetHeight;
+    emailInp && emailInp.focus();
+  }
+
+  function hidePopup() {
+    overlay.hidden = true;
+  }
+
+  // Trigger 1: após 8 segundos
+  const timer = setTimeout(showPopup, 8000);
+
+  // Trigger 2: ao rolar 50% da página
+  function onScroll() {
+    const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    if (scrolled >= 0.5) {
+      clearTimeout(timer);
+      showPopup();
+      window.removeEventListener("scroll", onScroll);
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  // Fechar ao clicar no X
+  closeBtn && closeBtn.addEventListener("click", hidePopup);
+
+  // Fechar ao clicar fora do modal
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) hidePopup();
+  });
+
+  // Fechar com Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !overlay.hidden) hidePopup();
+  });
+
+  // Salvar e-mail no Supabase
+  async function saveEmail(email) {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+        method: "POST",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": `Bearer ${SUPABASE_KEY}`,
+          "Content-Type": "application/json",
+          "Prefer": "return=minimal",
+        },
+        body: JSON.stringify({ email, source: "popup_cupom" }),
+      });
+      return res.ok || res.status === 201;
+    } catch {
+      return false; // erro de rede — mostra cupom mesmo assim
+    }
+  }
+
+  // Envio do formulário
+  form && form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = emailInp.value.trim();
+
+    // Validação básica
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorMsg.hidden = false;
+      emailInp.focus();
+      return;
+    }
+    errorMsg.hidden = true;
+
+    // Feedback visual no botão
+    const submitBtn = form.querySelector(".coupon-submit");
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = "Salvando…";
+    submitBtn.disabled = true;
+
+    await saveEmail(email);
+
+    // Marcar como capturado (não mostrar de novo)
+    localStorage.setItem(STORAGE_KEY, "1");
+
+    // Trocar para estado de sucesso
+    formState.hidden = true;
+    succState.hidden = false;
+  });
+
+  // Botão copiar cupom
+  copyBtn && copyBtn.addEventListener("click", () => {
+    navigator.clipboard.writeText("CRIA25").then(() => {
+      copyBtn.textContent = "Copiado ✓";
+      copyBtn.classList.add("copied");
+      setTimeout(() => {
+        copyBtn.textContent = "Copiar";
+        copyBtn.classList.remove("copied");
+      }, 2500);
+    });
+  });
+
+  // Fechar ao clicar em "Usar meu cupom agora"
+  document.querySelector(".coupon-cta-btn") &&
+    document.querySelector(".coupon-cta-btn").addEventListener("click", hidePopup);
+})();
+
