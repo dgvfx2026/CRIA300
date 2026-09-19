@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.cria.club/sitemap.xml

@@ -1,0 +1,198 @@
+[
+  {
+    "file": "animacao_gato_robo.mp4",
+    "originalBytes": 2198750,
+    "bytes": 1546884,
+    "width": 540,
+    "height": 960,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "18.048000",
+    "originalDuration": "18.056000"
+  },
+  {
+    "file": "cinematic_gato_menina.mp4",
+    "originalBytes": 713115,
+    "bytes": 599378,
+    "width": 540,
+    "height": 960,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "8.554667",
+    "originalDuration": "8.562000"
+  },
+  {
+    "file": "cinematic_predio.mp4",
+    "originalBytes": 7284487,
+    "bytes": 3267650,
+    "width": 540,
+    "height": 960,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "20.053333",
+    "originalDuration": "20.061000"
+  },
+  {
+    "file": "cinematic_relogio.mp4",
+    "originalBytes": 1640758,
+    "bytes": 1448035,
+    "width": 540,
+    "height": 960,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "20.053333",
+    "originalDuration": "20.061000"
+  },
+  {
+    "file": "cinematic_superhero.mp4",
+    "originalBytes": 1890629,
+    "bytes": 1452572,
+    "width": 540,
+    "height": 960,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "15.061333",
+    "originalDuration": "15.069000"
+  },
+  {
+    "file": "fooh_ballantines.mp4",
+    "originalBytes": 18214878,
+    "bytes": 3182619,
+    "width": 540,
+    "height": 960,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "18.048000",
+    "originalDuration": "18.056000"
+  },
+  {
+    "file": "fooh_kitkat.mp4",
+    "originalBytes": 3319004,
+    "bytes": 1786607,
+    "width": 540,
+    "height": 960,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "19.050667",
+    "originalDuration": "19.058000"
+  },
+  {
+    "file": "fooh_vans.mp4",
+    "originalBytes": 2470713,
+    "bytes": 811195,
+    "width": 480,
+    "height": 854,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "11.050667",
+    "originalDuration": "11.058000"
+  },
+  {
+    "file": "fooh_whey.mp4",
+    "originalBytes": 2693621,
+    "bytes": 1487727,
+    "width": 540,
+    "height": 960,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "18.048000",
+    "originalDuration": "18.056000"
+  },
+  {
+    "file": "packshot_redbull.mp4",
+    "originalBytes": 2776174,
+    "bytes": 1443999,
+    "width": 540,
+    "height": 960,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "10.048000",
+    "originalDuration": "10.056000"
+  },
+  {
+    "file": "ugc_body_splash.mp4",
+    "originalBytes": 4837713,
+    "bytes": 1024371,
+    "width": 540,
+    "height": 960,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "10.005333",
+    "originalDuration": "10.013000"
+  },
+  {
+    "file": "ugc_roupas.mp4",
+    "originalBytes": 3813998,
+    "bytes": 1929681,
+    "width": 540,
+    "height": 960,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "15.061333",
+    "originalDuration": "15.069000"
+  },
+  {
+    "file": "ugc_skincare.mp4",
+    "originalBytes": 1228484,
+    "bytes": 1118381,
+    "width": 540,
+    "height": 960,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "15.061333",
+    "originalDuration": "15.069000"
+  },
+  {
+    "file": "ugc_unboxing.mp4",
+    "originalBytes": 1673003,
+    "bytes": 1427735,
+    "width": 540,
+    "height": 960,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "audio": [
+      "aac"
+    ],
+    "duration": "20.053333",
+    "originalDuration": "20.061000"
+  }
+]
