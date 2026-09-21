@@ -418,6 +418,29 @@ body:has(.sticky-cta:not([hidden])) .contact-float{bottom:100px}
   border-color:rgba(99,140,255,0.55);
   background:rgba(99,140,255,0.06);
 }
+.coupon-phone-wrap{
+  display:flex;align-items:center;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:10px;overflow:hidden;
+  transition:border-color .18s,background .18s;
+}
+.coupon-phone-wrap:focus-within{
+  border-color:rgba(99,140,255,0.55);
+  background:rgba(99,140,255,0.06);
+}
+.coupon-phone-flag{
+  padding:0 12px;font-size:13px;color:rgba(255,255,255,0.45);
+  white-space:nowrap;border-right:1px solid rgba(255,255,255,0.1);
+  height:100%;display:flex;align-items:center;background:rgba(255,255,255,0.03);
+}
+.coupon-phone-wrap input[type="tel"]{
+  flex:1;padding:13px 14px;
+  background:none;border:none;
+  color:#fff;font-size:14px;font-family:inherit;
+  outline:none;min-width:0;
+}
+.coupon-phone-wrap input[type="tel"]::placeholder{color:rgba(255,255,255,0.3)}
 .coupon-submit{
   width:100%;padding:13px 20px;
   background:linear-gradient(135deg,#3b82f6,#6366f1);

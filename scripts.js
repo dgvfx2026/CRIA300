@@ -355,11 +355,12 @@
   // Não mostrar se já capturou o e-mail
   if (localStorage.getItem(STORAGE_KEY)) return;
 
-  const overlay   = document.getElementById("coupon-overlay");
-  const closeBtn  = document.getElementById("coupon-close");
-  const form      = document.getElementById("coupon-form");
-  const emailInp  = document.getElementById("coupon-email");
-  const errorMsg  = document.getElementById("coupon-error");
+  const overlay    = document.getElementById("coupon-overlay");
+  const closeBtn   = document.getElementById("coupon-close");
+  const form       = document.getElementById("coupon-form");
+  const emailInp   = document.getElementById("coupon-email");
+  const whatsappInp= document.getElementById("coupon-whatsapp");
+  const errorMsg   = document.getElementById("coupon-error");
   const formState = document.getElementById("coupon-form-state");
   const succState = document.getElementById("coupon-success-state");
   const copyBtn   = document.getElementById("coupon-copy-btn");
@@ -414,7 +415,7 @@
   // Trigger 2: ao rolar 50% da página
   function onScroll() {
     const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-    if (scrolled >= 0.5) {
+    if (scrolled >= 0.65) {
       clearTimeout(timer);
       showPopup();
       window.removeEventListener("scroll", onScroll);
@@ -435,8 +436,8 @@
     if (e.key === "Escape" && !overlay.hidden) hidePopup();
   });
 
-  // Salvar e-mail no Supabase
-  async function saveEmail(email) {
+  // Salvar lead no Supabase (email + whatsapp)
+  async function saveLead(email, whatsapp) {
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
         method: "POST",
@@ -446,39 +447,44 @@
           "Content-Type": "application/json",
           "Prefer": "return=minimal",
         },
-        body: JSON.stringify({ email, source: "popup_cupom" }),
+        body: JSON.stringify({ email, whatsapp, source: "popup_cupom" }),
       });
       return res.ok || res.status === 201;
     } catch {
-      return false; // erro de rede — mostra cupom mesmo assim
+      return false;
     }
   }
 
   // Envio do formulário
   form && form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const email = emailInp.value.trim();
+    const email    = emailInp ? emailInp.value.trim() : "";
+    const whatsapp = whatsappInp ? whatsappInp.value.replace(/\D/g, "") : "";
 
-    // Validação básica
+    // Validação email
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       errorMsg.hidden = false;
-      emailInp.focus();
+      errorMsg.textContent = "Por favor, insira um e-mail válido.";
+      emailInp && emailInp.focus();
+      return;
+    }
+    // Validação WhatsApp — mínimo 10 dígitos (DDD + número)
+    if (!whatsapp || whatsapp.length < 10) {
+      errorMsg.hidden = false;
+      errorMsg.textContent = "Por favor, insira seu WhatsApp com DDD.";
+      whatsappInp && whatsappInp.focus();
       return;
     }
     errorMsg.hidden = true;
 
-    // Feedback visual no botão
+    // Feedback no botão
     const submitBtn = form.querySelector(".coupon-submit");
-    const originalText = submitBtn.innerHTML;
     submitBtn.innerHTML = "Salvando…";
     submitBtn.disabled = true;
 
-    await saveEmail(email);
+    await saveLead(email, "+55" + whatsapp);
 
-    // Marcar como capturado (não mostrar de novo)
     localStorage.setItem(STORAGE_KEY, "1");
-
-    // Trocar para estado de sucesso
     formState.hidden = true;
     succState.hidden = false;
   });
