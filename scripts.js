@@ -27,34 +27,9 @@
 
     const pauseAllVideos = () => videos.forEach(pauseVideo);
 
+    // Playback starts only with the visitor's native play control.
     const updateVideo = (video) => {
-      const state = videoStates.get(video);
-      if (!canBeVisible(video)) {
-        pauseVideo(video);
-        return;
-      }
-
-      if (state.manuallyPaused || prefersReducedMotion() || prefersLessData() || !video.paused) return;
-      // A pause can precede its queued event. Do not restart until we know who paused it.
-      if (state.expectedPauses > 0 || state.wasPlaying) return;
-
-      // Controls remain available if the browser refuses automatic playback.
-      try {
-        state.wasPlaying = true;
-        const playback = video.play();
-        if (playback && typeof playback.then === "function") {
-          playback.then(() => {
-            // Loading may finish after a filter, scroll, modal, or preference change.
-            if (!canBeVisible(video) || prefersReducedMotion() || prefersLessData()) pauseVideo(video);
-          }).catch((error) => {
-            // AbortError accompanies a queued pause; retain the guard until that event arrives.
-            if (!error || error.name !== "AbortError") state.wasPlaying = !video.paused;
-          });
-        }
-      } catch (_) {
-        state.wasPlaying = !video.paused;
-        // Older browsers can throw synchronously; the native play button still works.
-      }
+      if (!canBeVisible(video)) pauseVideo(video);
     };
 
     videos.forEach((video) => {
@@ -95,7 +70,7 @@
     const menuToggle = document.getElementById("menu-toggle");
     const navigation = document.getElementById("site-nav");
     const hero = document.getElementById("hero");
-    const offer = document.getElementById("comprar");
+    const offer = document.querySelector(".offer-card");
     const finalCta = document.getElementById("final-cta");
     const stickyCta = document.getElementById("sticky-cta");
     let framePending = false;
@@ -126,7 +101,8 @@
         && !intersectsViewport(offer, viewportHeight)
         && !intersectsViewport(finalCta, viewportHeight)
         && !(navigation && navigation.classList.contains("is-open"))
-        && !(dialog && dialog.open);
+        && !(dialog && dialog.open)
+        && !document.body.classList.contains("coupon-is-open");
       stickyCta.hidden = !shouldShow;
     };
 
@@ -156,6 +132,7 @@
       });
     }
 
+    document.addEventListener("cria:coupon-change", scheduleLayoutUpdate);
     window.addEventListener("scroll", scheduleLayoutUpdate, { passive: true });
     window.addEventListener("resize", scheduleLayoutUpdate, { passive: true });
     window.addEventListener("load", scheduleLayoutUpdate, { once: true });
@@ -346,94 +323,141 @@
   else initialize();
 })();
 
-/* ── COUPON POPUP ── */
+/* ── COUPON POPUP: presentation only; capture contract preserved below. ── */
 (function () {
   const STORAGE_KEY = "cria_lead_captured";
   const SUPABASE_URL = "https://ulapqyoltznvpbygvvik.supabase.co";
   const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVsYXBxeW9sdHpudnBieWd2dmlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5OTE5NjIsImV4cCI6MjEwNDU2Nzk2Mn0.OC4IZqEWeivNDrWNrigUwhZ00_rPTXle7LvTqs2Ii1E";
 
-  // Não mostrar se já capturou o e-mail
-  if (localStorage.getItem(STORAGE_KEY)) return;
+  const SESSION_KEY = "cria_coupon_dismissed";
+  const readFlag = (storage, key) => {
+    try { return Boolean(window[storage].getItem(key)); } catch (_) { return false; }
+  };
+  const writeSessionFlag = () => {
+    try { sessionStorage.setItem(SESSION_KEY, "1"); } catch (_) { /* In-memory guard still applies. */ }
+  };
+  if (readFlag("localStorage", STORAGE_KEY)) {
+    const invite = document.getElementById("lead-invite");
+    if (invite) invite.hidden = true;
+    return;
+  }
 
-  const overlay    = document.getElementById("coupon-overlay");
-  const closeBtn   = document.getElementById("coupon-close");
-  const form       = document.getElementById("coupon-form");
-  const emailInp   = document.getElementById("coupon-email");
-  const whatsappInp= document.getElementById("coupon-whatsapp");
-  const errorMsg   = document.getElementById("coupon-error");
+  const overlay = document.getElementById("coupon-overlay");
+  const closeBtn = document.getElementById("coupon-close");
+  const form = document.getElementById("coupon-form");
+  const emailInp = document.getElementById("coupon-email");
+  const whatsappInp = document.getElementById("coupon-whatsapp");
+  const errorMsg = document.getElementById("coupon-error");
   const formState = document.getElementById("coupon-form-state");
   const succState = document.getElementById("coupon-success-state");
-  const copyBtn   = document.getElementById("coupon-copy-btn");
-
+  const copyBtn = document.getElementById("coupon-copy-btn");
+  const offer = document.querySelector(".offer-card");
+  const examples = document.getElementById("resultados");
+  const finalCta = document.getElementById("final-cta");
+  const mediaDialog = document.getElementById("media-dialog");
   if (!overlay) return;
 
   let triggered = false;
+  let checkoutIntent = false;
+  let engagedSeconds = 0;
+  let hasSeenOffer = false;
+  let hasSeenExamples = false;
+  let lastScroll = window.scrollY;
+  let upwardDistance = 0;
+  let returnFocus = null;
+  let backgroundStates = [];
 
-  function showPopup() {
-    if (triggered) return;
+  const inView = (element) => {
+    if (!element) return false;
+    const rect = element.getBoundingClientRect();
+    return rect.top < window.innerHeight && rect.bottom > 0;
+  };
+  const updateExposure = () => {
+    if (inView(offer)) hasSeenOffer = true;
+    if (inView(examples)) hasSeenExamples = true;
+  };
+  const canInterrupt = () => !document.hidden && !checkoutIntent
+    && !readFlag("sessionStorage", SESSION_KEY)
+    && !inView(offer) && !inView(finalCta)
+    && !(mediaDialog && mediaDialog.open)
+    && !document.querySelector(".site-nav.is-open")
+    && document.activeElement?.tagName !== "VIDEO"
+    && !Array.from(document.querySelectorAll("video")).some((video) => !video.paused && !video.ended)
+    && !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement?.tagName);
+
+  const engagementTimer = window.setInterval(() => {
+    if (!document.hidden && overlay.hidden) engagedSeconds += 1;
+  }, 1000);
+
+  function showPopup(manual = false, reason = "manual") {
+    if (!manual && (triggered || !canInterrupt())) return;
+    if (!overlay.hidden) return;
     triggered = true;
+    window.clearInterval(engagementTimer);
+    returnFocus = document.activeElement;
+    backgroundStates = Array.from(document.querySelectorAll("main, .site-header, .site-footer, .contact-float, .sticky-cta")).map((node) => ({node, inert: node.inert}));
+    backgroundStates.forEach(({node}) => { node.inert = true; });
+    document.body.classList.add("coupon-is-open");
     overlay.hidden = false;
-    // força reflow para a transição CSS funcionar
-    overlay.offsetHeight;
-    emailInp && emailInp.focus();
-
-    // Countdown 10 minutos
-    const countdownEl = document.getElementById("coupon-countdown");
-    const timerEl     = document.getElementById("coupon-timer");
-    if (!countdownEl) return;
-
-    let seconds = 10 * 60; // 600 segundos
-
-    function tick() {
-      const m = Math.floor(seconds / 60);
-      const s = seconds % 60;
-      countdownEl.textContent = `${m}:${String(s).padStart(2, "0")}`;
-
-      // Fica vermelho e pisca abaixo de 60s
-      if (timerEl) timerEl.classList.toggle("urgent", seconds <= 60);
-
-      if (seconds <= 0) {
-        clearInterval(countdownInterval);
-        // Popup fecha suavemente ao zerar
-        hidePopup();
-        return;
-      }
-      seconds--;
-    }
-
-    tick(); // exibe imediatamente sem esperar 1s
-    const countdownInterval = setInterval(tick, 1000);
+    // Do not open the mobile keyboard before the visitor chooses a field.
+    const focusTarget = window.innerWidth < 800 || !succState.hidden ? closeBtn : emailInp;
+    if (focusTarget) focusTarget.focus();
+    document.dispatchEvent(new Event("cria:coupon-change"));
+    if (window.fbq) window.fbq("trackCustom", "CRIA_CouponOpen", { trigger: reason });
   }
 
   function hidePopup() {
+    if (overlay.hidden) return;
     overlay.hidden = true;
+    writeSessionFlag();
+    document.body.classList.remove("coupon-is-open");
+    backgroundStates.forEach(({node, inert}) => { node.inert = inert; });
+    backgroundStates = [];
+    if (returnFocus && returnFocus.isConnected) returnFocus.focus({preventScroll: true});
+    document.dispatchEvent(new Event("cria:coupon-change"));
   }
 
-  // Trigger 1: após 8 segundos
-  const timer = setTimeout(showPopup, 8000);
-
-  // Trigger 2: ao rolar 50% da página
+  // No timer-only popup. On mobile, rescue a considered visit when the user returns up
+  // through the content after seeing the price. Never interrupt the offer or a playing video.
   function onScroll() {
-    const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-    if (scrolled >= 0.65) {
-      clearTimeout(timer);
-      showPopup();
-      window.removeEventListener("scroll", onScroll);
-    }
+    updateExposure();
+    const current = window.scrollY;
+    if (current < lastScroll) upwardDistance += lastScroll - current;
+    else if (current > lastScroll) upwardDistance = 0;
+    lastScroll = current;
+    if (engagedSeconds >= 60 && hasSeenOffer && upwardDistance >= 160) showPopup(false, "return_after_offer");
   }
-  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("scroll", onScroll, {passive: true});
+  window.addEventListener("resize", updateExposure, {passive: true});
+  updateExposure();
 
-  // Fechar ao clicar no X
-  closeBtn && closeBtn.addEventListener("click", hidePopup);
-
-  // Fechar ao clicar fora do modal
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) hidePopup();
+  // Desktop exit intent requires prior engagement and product/price exposure.
+  document.addEventListener("mouseout", (event) => {
+    if (window.innerWidth < 900 || event.relatedTarget || event.clientY > 0) return;
+    if (engagedSeconds >= 45 && (hasSeenExamples || hasSeenOffer)) showPopup(false, "desktop_exit");
   });
-
-  // Fechar com Escape
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !overlay.hidden) hidePopup();
+  document.querySelectorAll("[data-open-coupon]").forEach((button) => {
+    button.addEventListener("click", () => showPopup(true, "manual"));
+  });
+  document.addEventListener("click", (event) => {
+    const link = event.target instanceof Element ? event.target.closest("a.checkout-button") : null;
+    if (link) {
+      checkoutIntent = true;
+      writeSessionFlag();
+      window.clearInterval(engagementTimer);
+    }
+  }, {capture: true});
+  closeBtn && closeBtn.addEventListener("click", hidePopup);
+  overlay.addEventListener("click", (event) => { if (event.target === overlay) hidePopup(); });
+  document.addEventListener("keydown", (event) => {
+    if (overlay.hidden) return;
+    if (event.key === "Escape") { event.preventDefault(); hidePopup(); }
+    if (event.key === "Tab") {
+      const focusable = Array.from(overlay.querySelectorAll("button, input, a[href]")).filter((el) => !el.disabled && !el.closest("[hidden]"));
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
   });
 
   // Salvar lead no Supabase (email + whatsapp)
@@ -506,3 +530,11 @@
     document.querySelector(".coupon-cta-btn").addEventListener("click", hidePopup);
 })();
 
+
+/* CTA intent measurement. No purchase events or backend changes. */
+document.addEventListener("click", (event) => {
+  const link = event.target instanceof Element ? event.target.closest("a[data-cta-position]") : null;
+  if (link && window.fbq) {
+    window.fbq("trackCustom", "CRIA_CheckoutClick", { position: link.dataset.ctaPosition });
+  }
+});
