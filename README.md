@@ -19,7 +19,7 @@ Abra um terminal na pasta do site e execute `python -m http.server 4173 --bind 1
 
 ## Manutenção da oferta
 
-O link de compra continua sendo `https://pay.kiwify.com.br/7fTgGYD`. Todos os botões de compra vão diretamente para esse checkout, inclusive a barra fixa e o botão após a captura de lead. Os links de navegação e “Ver como usar” conduzem às seções da página.
+O link de compra continua sendo `https://pay.kiwify.com.br/7fTgGYD`. Todos os botões de compra vão diretamente para esse checkout, inclusive a barra fixa e o botão após a captura de lead. Os links de navegação e “Ver vídeos do CRIA” conduzem às seções da página.
 
 Condições preservadas: R$47 à vista, 11 parcelas de R$5,22 (total R$57,42 com acréscimo), compra única, garantia de 7 dias, atualizações futuras, acesso à plataforma com 300 prompts e guia de adaptação. Atualize conjuntamente o resumo da oferta, a FAQ, os textos de preço, a barra fixa, a descrição SEO e o JSON-LD quando as condições comerciais mudarem.
 
@@ -38,7 +38,7 @@ O pagamento é concluído na Kiwify; esta landing page não coleta dados de cart
 
 A página apresenta, nesta ordem: proposta e preço, modo de uso, exemplos, diferenciação da biblioteca, criador, oferta completa, FAQ e CTA final. Preço, compra única, garantia e ferramentas de IA separadas aparecem já no início. No celular, o cartão de preço precede a lista completa de itens.
 
-A galeria começa com seis exemplos misturando imagem e vídeo e oferece filtros e expansão. Os 12 exemplos de imagem e os 14 de vídeo foram preservados. Imagens abrem em ampliação. Vídeos começam apenas pelo controle do visitante, carregam sob demanda e param fora de vista. A barra fixa aparece depois da primeira seção e se esconde diante do cartão de compra, do CTA final e de menus ou diálogos abertos.
+A apresentação inicial destaca um vídeo de produto reproduzível e duas prévias de vídeo. A galeria começa com seis vídeos de categorias diferentes, oferece filtros e expansão, e mantém todos os 14 vídeos antes das 12 imagens. O filtro de imagens permite acessá-las diretamente. Os 12 exemplos de imagem e os 14 de vídeo foram preservados. Imagens abrem em ampliação. Vídeos começam apenas pelo controle do visitante, carregam sob demanda e param fora de vista. A barra fixa aparece depois da primeira seção e se esconde diante do cartão de compra, do CTA final e de menus ou diálogos abertos.
 
 Sem JavaScript, a navegação, as perguntas frequentes, as imagens, os controles dos vídeos e o link de compra continuam disponíveis. Os filtros interativos ficam ocultos e a galeria mostra todos os exemplos.
 
