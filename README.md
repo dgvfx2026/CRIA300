@@ -8,7 +8,7 @@ Site estático em HTML, CSS e JavaScript, sem etapa de build ou dependências de
 - `styles.css`: identidade visual, componentes, responsividade e preferências de movimento.
 - `scripts.js`: menu móvel, galeria, ampliação das imagens, vídeos, CTA fixo, Meta Pixel e apresentação do pop-up de leads.
 - `media/optimized/`: imagens WebP com versões de 480 e até 1000 pixels.
-- `media/posters/`: imagens de apresentação dos vídeos.
+- `media/posters/`: imagens de apresentação dos vídeos. As capas `*-impact.webp` são frames reais dos exemplos, escolhidos para mostrar o efeito ou a cena em destaque.
 - `media/video/`: vídeos MP4 H.264/AAC otimizados, com carregamento sob demanda.
 - `media/logo-cria.png`: logo oficial original, usada no cabeçalho, rodapé, mockup, favicon e compartilhamento social.
 - `favicon.svg`, `robots.txt`, `sitemap.xml`: identidade e descoberta do site.
@@ -38,7 +38,11 @@ O pagamento é concluído na Kiwify; esta landing page não coleta dados de cart
 
 A página apresenta, nesta ordem: proposta e preço, modo de uso, exemplos, diferenciação da biblioteca, criador, oferta completa, FAQ e CTA final. Preço, compra única, garantia e ferramentas de IA separadas aparecem já no início. No celular, o cartão de preço precede a lista completa de itens.
 
-A apresentação inicial destaca um vídeo FOOH reproduzível e prévias de animação e UGC. A galeria agrupa os vídeos nesta ordem: FOOH, Animação, UGC e Cinematic; o exemplo adicional de Packshot vem após esses grupos. Começa com seis vídeos, oferece filtros e expansão, e mantém todos os 14 vídeos antes das 12 imagens. O filtro de imagens permite acessá-las diretamente. Os 12 exemplos de imagem e os 14 de vídeo foram preservados. Imagens abrem em ampliação. Vídeos começam apenas pelo controle do visitante, carregam sob demanda e param fora de vista. A barra fixa aparece depois da primeira seção e se esconde diante do cartão de compra, do CTA final e de menus ou diálogos abertos.
+A apresentação inicial destaca um vídeo FOOH e prévias reproduzíveis de animação e UGC, com capas reais e botões centrais de play. No celular, o FOOH ocupa toda a largura do bloco e fica logo após os botões e a garantia. A galeria também destaca o primeiro FOOH em toda a largura no celular, mantendo os demais em uma grade compacta. Os vídeos da galeria usam a proporção original de 9:16; os vídeos da abertura preservam o enquadramento completo durante a reprodução.
+
+A galeria agrupa os vídeos nesta ordem: FOOH, Animação, UGC e Cinematic; o exemplo adicional de Packshot vem após esses grupos. Começa com seis vídeos, oferece filtros e expansão, e mantém todos os 14 vídeos antes das 12 imagens. O filtro de imagens permite acessá-las diretamente. Os 12 exemplos de imagem e os 14 de vídeo foram preservados. Imagens abrem em ampliação. Vídeos começam apenas pelo controle do visitante, carregam sob demanda e param fora de vista. Iniciar um vídeo pausa o anterior. Os controles nativos ficam disponíveis durante a reprodução, inclusive para volume e tela cheia. A barra fixa aparece depois da primeira seção e se esconde diante do cartão de compra, do CTA final e de menus ou diálogos abertos.
+
+A direção visual mantém o grafite e a marca azul/violeta, reserva o azul claro dos botões para ações principais e usa fundos discretamente diferentes entre conteúdo, galeria e oferta. Textos secundários têm mais contraste. Molduras e etiquetas foram simplificadas para priorizar os exemplos visuais; o card de preço mantém a hierarquia original.
 
 Sem JavaScript, a navegação, as perguntas frequentes, as imagens, os controles dos vídeos e o link de compra continuam disponíveis. Os filtros interativos ficam ocultos e a galeria mostra todos os exemplos.
 
@@ -66,7 +70,7 @@ Foram conferidos os arquivos e destinos da página, os 26 exemplos, os campos do
 
 ## Publicação e versionamento
 
-Os arquivos estão prontos para o fluxo GitHub → Vercel já utilizado pelo projeto. A reformulação não exige mudar o framework, adicionar serviços ou instalar pacotes. Publique `index.html`, `styles.css`, `scripts.js` e este README juntos; os arquivos de mídia existentes não foram alterados.
+Os arquivos estão prontos para o fluxo GitHub → Vercel já utilizado pelo projeto. A reformulação não exige mudar o framework, adicionar serviços ou instalar pacotes. Publique `index.html`, `styles.css`, `scripts.js`, este README e os 14 novos arquivos `media/posters/*-impact.webp` juntos. Os vídeos e as imagens anteriores não foram alterados. Esta revisão usa CSS e JavaScript com a versão `20261004.3`.
 
 O domínio canônico é `https://www.cria.club/`. Se o domínio mudar, revise canonical, Open Graph, Twitter, JSON-LD, sitemap e a lista de domínios do Pixel. Ao atualizar CSS/JS, altere a versão nos respectivos links do HTML para invalidar caches.
 

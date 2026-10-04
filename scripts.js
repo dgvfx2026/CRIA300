@@ -27,17 +27,37 @@
 
     const pauseAllVideos = () => videos.forEach(pauseVideo);
 
-    // Playback starts only with the visitor's native play control.
+    // Playback starts only when the visitor chooses to play.
     const updateVideo = (video) => {
       if (!canBeVisible(video)) pauseVideo(video);
     };
 
     videos.forEach((video) => {
       videoStates.set(video, { visible: false, manuallyPaused: false, expectedPauses: 0, wasPlaying: !video.paused });
+      const playButton = document.querySelector(`[data-video-play="${video.id}"]`);
+      const media = video.parentElement;
+      const synchronizePlayButton = () => {
+        if (playButton) playButton.hidden = !video.paused && !video.ended;
+        media.classList.toggle("is-playing", !video.paused && !video.ended);
+      };
+      if (playButton) {
+        // Keep native controls as the fallback when JavaScript is unavailable.
+        video.controls = false;
+        playButton.hidden = false;
+        playButton.addEventListener("click", () => {
+          video.controls = true;
+          const playback = video.play();
+          if (playback && playback.catch) playback.catch(synchronizePlayButton);
+        });
+      }
       video.addEventListener("play", () => {
+        videos.forEach((other) => { if (other !== video) pauseVideo(other); });
         videoStates.get(video).wasPlaying = true;
+        synchronizePlayButton();
       });
+      video.addEventListener("ended", synchronizePlayButton);
       video.addEventListener("pause", () => {
+        synchronizePlayButton();
         const state = videoStates.get(video);
         const programmatic = state.expectedPauses > 0;
         if (programmatic) {
