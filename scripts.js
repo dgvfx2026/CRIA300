@@ -167,12 +167,16 @@
     const galleryMore = document.getElementById("gallery-more");
     const galleryToolbar = document.querySelector(".gallery-toolbar");
     const initialItemCount = 6;
+    const galleryMobile = window.matchMedia ? window.matchMedia("(max-width: 800px)") : null;
     let activeFilter = "all";
     let galleryExpanded = false;
 
     const updateGallery = () => {
+      // One full-width FOOH followed by three complete pairs on mobile.
+      const itemLimit = activeFilter !== "image" && (galleryMobile ? galleryMobile.matches : window.innerWidth <= 800)
+        ? initialItemCount + 1 : initialItemCount;
       const matching = galleryItems.filter((item) => activeFilter === "all" || item.dataset.kind === activeFilter);
-      const visible = new Set(galleryExpanded ? matching : matching.slice(0, initialItemCount));
+      const visible = new Set(galleryExpanded ? matching : matching.slice(0, itemLimit));
       galleryItems.forEach((item) => {
         item.hidden = !visible.has(item);
         if (item.hidden) {
@@ -186,7 +190,7 @@
         button.classList.toggle("is-active", selected);
       });
       if (galleryMore) {
-        galleryMore.hidden = matching.length <= initialItemCount;
+        galleryMore.hidden = matching.length <= itemLimit;
         galleryMore.textContent = galleryExpanded ? "Mostrar menos" : "Ver mais exemplos";
         galleryMore.setAttribute("aria-expanded", String(galleryExpanded));
       }
@@ -230,6 +234,10 @@
         });
       }
       updateGallery();
+      if (galleryMobile) {
+        if (galleryMobile.addEventListener) galleryMobile.addEventListener("change", updateGallery);
+        else if (galleryMobile.addListener) galleryMobile.addListener(updateGallery);
+      }
     }
 
     const dialogImage = document.getElementById("dialog-image");
