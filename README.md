@@ -17,19 +17,27 @@ Site estático em HTML, CSS e JavaScript, sem etapa de build ou dependências de
 
 Abra um terminal na pasta do site e execute `python -m http.server 4173 --bind 127.0.0.1`. Acesse `http://127.0.0.1:4173/` no navegador. Também é possível abrir o `index.html` diretamente, mas um servidor local é preferível para testar vídeos e navegação.
 
+## Migração Cakto — 18/10/2026
+
+O HTML foi atualizado para a Cakto, incluindo sete botões, JSON-LD, parcelamento, FAQ e instruções do cupom. O proprietário autorizou manter temporariamente a taxa de R$0,99 e pediu expressamente o parcelamento de 11x de R$5,33.
+
+Valores exibidos conforme o total do checkout: R$47,99 à vista (R$47 do produto + R$0,99 de taxa da Cakto), 11x de R$5,33 (total R$58,63) ou R$36,24 à vista com CRIA25. O desconto de 25% aplica-se ao preço do produto, sem descontar a taxa. Se a taxa for retirada, atualizar os totais na página após conferir novamente o checkout.
+
+O webhook existente aceita data.customer.email no formato Individual/V1. O payload Agrupado/V2 não é aceito. Como o código atual não filtra eventos, a Cakto foi configurada somente para compra aprovada. O teste de compatibilidade foi local, com armazenamento simulado. Nenhum teste de compra nem comprador fictício foi enviado ao banco; a confirmação de entrega real deve ser acompanhada nos logs da primeira compra aprovada.
+
 ## Manutenção da oferta
 
-O link de compra continua sendo `https://pay.kiwify.com.br/7fTgGYD`. Todos os botões de compra vão diretamente para esse checkout, inclusive a barra fixa e o botão após a captura de lead. Os links de navegação e “Ver vídeos do CRIA” conduzem às seções da página.
+O link de compra nesta versão é `https://pay.cakto.com.br/hb6td8v_1132886`. Todos os botões de compra vão diretamente para esse checkout, inclusive a barra fixa e o botão após a captura de lead. Os links de navegação e “Ver vídeos do CRIA” conduzem às seções da página.
 
-Condições preservadas: R$47 à vista, 11 parcelas de R$5,22 (total R$57,42 com acréscimo), compra única, garantia de 7 dias, atualizações futuras, acesso à plataforma com 300 prompts e guia de adaptação. Atualize conjuntamente o resumo da oferta, a FAQ, os textos de preço, a barra fixa, a descrição SEO e o JSON-LD quando as condições comerciais mudarem.
+Condições: R$47,99 à vista com taxa, 11 parcelas de R$5,33 (total R$58,63 com acréscimo e taxa), compra única, garantia de 7 dias, atualizações futuras, acesso à plataforma com 300 prompts e guia de adaptação. Atualize conjuntamente o resumo da oferta, a FAQ, os textos de preço, a barra fixa, a descrição SEO e o JSON-LD quando as condições comerciais mudarem.
 
-O pagamento é concluído na Kiwify; esta landing page não coleta dados de cartão e não contém checkout próprio. As ferramentas de IA e seus créditos são contratados separadamente.
+O pagamento é concluído na Cakto; esta landing page não coleta dados de cartão e não contém checkout próprio. As ferramentas de IA e seus créditos são contratados separadamente.
 
 ## Medição e contato
 
 - Meta Pixel: `1509642039730970`, evento `PageView` preservado.
 - Com JavaScript, a medição só é iniciada em `cria.club`, `www.cria.club` e `cria300.vercel.app`, para evitar visitas de teste local. O fallback original de imagem sem JavaScript permanece no HTML.
-- `CRIA_CheckoutClick`: evento personalizado do Pixel, com `position` para diferenciar os botões. Mede intenção de saída para a Kiwify; não é uma confirmação de início de checkout nem de compra.
+- `CRIA_CheckoutClick`: evento personalizado do Pixel, com `position` para diferenciar os botões. Mede intenção de saída para a Cakto; não é uma confirmação de início de checkout nem de compra.
 - `CRIA_CouponOpen`: evento personalizado com o gatilho de abertura do pop-up.
 - Instagram: `https://instagram.com/dg_vfx`.
 - WhatsApp: `555180328211`.
@@ -50,7 +58,7 @@ Não há contagem regressiva artificial. Não foram adicionados depoimentos, ava
 
 ## Pop-up e integrações preservadas
 
-O pop-up mantém os campos e a rotina original de captura. Endereço do Supabase, chave pública existente, tabela `leads`, cabeçalhos, corpo `{ email, whatsapp, source: "popup_cupom" }`, prefixo `+55` e marcador `cria_lead_captured` foram preservados. O fluxo de envio do formulário permanece igual. Não há webhook de compra neste repositório; nenhuma configuração externa de Kiwify ou Supabase foi alterada.
+O pop-up mantém os campos e a rotina original de captura. Endereço do Supabase, chave pública existente, tabela `leads`, cabeçalhos, corpo `{ email, whatsapp, source: "popup_cupom" }`, prefixo `+55` e marcador `cria_lead_captured` foram preservados. O fluxo de envio do formulário permanece igual. O receptor de compras fica em outro projeto, na rota https://cria-prompts.vercel.app/api/webhook. A integração de compra da Cakto foi cadastrada em 18/10/2026 para o produto CRIA, somente purchase_approved e formato Individual (V1), sem alterar o receptor nem o banco. Não use o formato Agrupado (V2) com esse receptor.
 
 O pop-up não abre por tempo isolado nem pela profundidade de rolagem:
 
@@ -60,7 +68,7 @@ O pop-up não abre por tempo isolado nem pela profundidade de rolagem:
 
 Os gatilhos automáticos não interrompem o cartão de compra, o CTA final, vídeos em reprodução, campos em foco, menu ou ampliação de imagem. Clicar em um botão de compra ou dispensar o pop-up desativa novas interrupções naquela sessão. Leads já capturados não recebem a oferta de cadastro. O formulário pode ser reaberto voluntariamente após fechar.
 
-O desconto existente é de 25%, com código `CRIA25`: R$47 → R$35,25 à vista. O botão de sucesso mantém o endereço original da Kiwify e informa que o comprador precisa aplicar o código antes de pagar. A configuração e a validade comercial desse cupom continuam sendo administradas na Kiwify.
+O desconto existente é de 25%, com código `CRIA25`: R$47 → R$35,25 pelo produto, mais R$0,99 de taxa da Cakto; total à vista de R$36,24. O botão de sucesso mantém o endereço original da Cakto e informa que o comprador precisa aplicar o código antes de pagar. O cupom foi criado na Cakto em 18/10/2026, com 25%, sem prazo final e oculto para afiliados; sua aplicação pública foi conferida sem realizar compra.
 
 O pop-up possui fechamento por botão, Escape e fundo, foco contido no diálogo e restauração de foco. No celular, abrir o pop-up não aciona o teclado automaticamente.
 
