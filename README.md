@@ -21,7 +21,7 @@ Abra um terminal na pasta do site e execute `python -m http.server 4173 --bind 1
 
 O HTML foi atualizado para a Cakto, incluindo sete botões, JSON-LD, parcelamento, FAQ e instruções do cupom. O proprietário autorizou manter temporariamente a taxa de R$0,99 e pediu expressamente o parcelamento de 11x de R$5,33.
 
-Valores exibidos conforme o total do checkout: R$47,99 à vista (R$47 do produto + R$0,99 de taxa da Cakto), 11x de R$5,33 (total R$58,63) ou R$36,24 à vista com CRIA25. O desconto de 25% aplica-se ao preço do produto, sem descontar a taxa. Se a taxa for retirada, atualizar os totais na página após conferir novamente o checkout.
+Por solicitação do proprietário, o hero e seu botão no cabeçalho apresentam R$47,00. A explicação da taxa aparece somente no último bloco da página, #final-cta. Os demais totais continuam conforme o checkout: R$47,99 à vista (R$47 do produto + R$0,99 de taxa da Cakto), 11x de R$5,33 (total R$58,63) ou R$36,24 à vista com CRIA25. O desconto de 25% aplica-se ao preço do produto, sem descontar a taxa. Se a taxa for retirada, atualizar os totais na página após conferir novamente o checkout.
 
 O webhook existente aceita data.customer.email no formato Individual/V1. O payload Agrupado/V2 não é aceito. Como o código atual não filtra eventos, a Cakto foi configurada somente para compra aprovada. O teste de compatibilidade foi local, com armazenamento simulado. Nenhum teste de compra nem comprador fictício foi enviado ao banco; a confirmação de entrega real deve ser acompanhada nos logs da primeira compra aprovada.
 
