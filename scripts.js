@@ -1,328 +1,147 @@
+/* CRIA 500 — progressive enhancement; content and checkout work without JS. */
 (() => {
-  "use strict";
+  document.documentElement.classList.add('js');
+  const $ = (selector) => document.querySelector(selector);
+  const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const menu = $('.site-nav');
+  const toggle = $('.menu-toggle');
+  const sticky = $('#sticky-cta');
+  const hero = $('.hero');
+  const offer = $('.offer-card');
+  const final = $('#final-cta');
+  const dialog = $('#media-dialog');
+  const player = $('#example-player');
+  let returnFocus = null;
+  let closing = false;
 
-  const initialize = () => {
-    const motionPreference = window.matchMedia
-      ? window.matchMedia("(prefers-reduced-motion: reduce)")
-      : null;
-    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    const prefersReducedMotion = () => Boolean(motionPreference && motionPreference.matches);
-    const prefersLessData = () => Boolean(connection && connection.saveData);
-    const dialog = document.getElementById("media-dialog");
-    const videos = Array.from(document.querySelectorAll("video"));
-    const videoStates = new WeakMap();
+  function closeMenu() {
+    menu.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Abrir menu');
+    updateSticky();
+  }
+  toggle.addEventListener('click', () => {
+    const open = !menu.classList.contains('is-open');
+    menu.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    updateSticky();
+  });
+  menu.addEventListener('click', (event) => { if (event.target.closest('a')) closeMenu(); });
+  document.addEventListener('click', (event) => {
+    if (menu.classList.contains('is-open') && !event.target.closest('.header-inner')) closeMenu();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu.classList.contains('is-open')) { closeMenu(); toggle.focus(); }
+  });
+  matchMedia('(min-width: 651px)').addEventListener('change', (event) => { if (event.matches) closeMenu(); });
 
-    const isDisplayed = (element) => !element.closest("[hidden]") && element.getClientRects().length > 0;
-    const canBeVisible = (video) => videoStates.get(video).visible && isDisplayed(video)
-      && !document.hidden && !(dialog && dialog.open);
-
-    const pauseVideo = (video) => {
-      const state = videoStates.get(video);
-      if (!video.paused) {
-        // Native pause events are queued: remember our own pauses separately from the viewer's.
-        state.expectedPauses += 1;
-        video.pause();
-      }
-    };
-
-    const pauseAllVideos = () => videos.forEach(pauseVideo);
-
-    // Playback starts only when the visitor chooses to play.
-    const updateVideo = (video) => {
-      if (!canBeVisible(video)) pauseVideo(video);
-    };
-
-    videos.forEach((video) => {
-      videoStates.set(video, { visible: false, manuallyPaused: false, expectedPauses: 0, wasPlaying: !video.paused });
-      const playButton = document.querySelector(`[data-video-play="${video.id}"]`);
-      const media = video.parentElement;
-      const synchronizePlayButton = () => {
-        if (playButton) playButton.hidden = !video.paused && !video.ended;
-        media.classList.toggle("is-playing", !video.paused && !video.ended);
-      };
-      if (playButton) {
-        // Keep native controls as the fallback when JavaScript is unavailable.
-        video.controls = false;
-        playButton.hidden = false;
-        playButton.addEventListener("click", () => {
-          video.controls = true;
-          const playback = video.play();
-          if (playback && playback.catch) playback.catch(synchronizePlayButton);
-        });
-      }
-      video.addEventListener("play", () => {
-        videos.forEach((other) => { if (other !== video) pauseVideo(other); });
-        videoStates.get(video).wasPlaying = true;
-        synchronizePlayButton();
+  // Only below-the-fold elements are hidden for reveal; the hero is always in HTML.
+  if ('IntersectionObserver' in window && !reduced.matches) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(({target, isIntersecting}) => {
+        if (!isIntersecting) return;
+        target.dataset.reveal = 'shown';
+        observer.unobserve(target);
       });
-      video.addEventListener("ended", synchronizePlayButton);
-      video.addEventListener("pause", () => {
-        synchronizePlayButton();
-        const state = videoStates.get(video);
-        const programmatic = state.expectedPauses > 0;
-        if (programmatic) {
-          state.expectedPauses -= 1;
-        } else if (!video.ended) {
-          // Preserve the viewer's choice even if the gallery changed before this event arrived.
-          state.manuallyPaused = true;
-        }
-        state.wasPlaying = !video.paused;
-        if (programmatic) updateVideo(video);
-      });
+    }, {rootMargin:'0px 0px -30px 0px', threshold:0.08});
+    $$('.reveal').forEach((element) => {
+      if (element.getBoundingClientRect().top < innerHeight) return;
+      element.dataset.reveal = 'waiting';
+      observer.observe(element);
     });
-
-    if ("IntersectionObserver" in window) {
-      const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          videoStates.get(entry.target).visible = entry.isIntersecting && entry.intersectionRatio >= 0.55;
-          updateVideo(entry.target);
-        });
-      }, { threshold: [0, 0.55] });
-      videos.forEach((video) => videoObserver.observe(video));
-    }
-    // Without IntersectionObserver videos use their ordinary, on-demand controls.
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) pauseAllVideos();
-      else videos.forEach(updateVideo);
+    reduced.addEventListener('change', (event) => {
+      if (!event.matches) return;
+      observer.disconnect();
+      $$('.reveal').forEach((element) => { delete element.dataset.reveal; });
     });
+  }
 
-    const menuToggle = document.getElementById("menu-toggle");
-    const navigation = document.getElementById("site-nav");
-    const hero = document.getElementById("hero");
-    const offer = document.querySelector(".offer-card");
-    const finalCta = document.getElementById("final-cta");
-    const stickyCta = document.getElementById("sticky-cta");
-    let framePending = false;
+  const cards = $$('.video-card');
+  const filters = $$('.gallery-filters button');
+  const more = $('#gallery-more');
+  const counter = $('.gallery-counter');
+  let activeFilter = 'all';
+  let expanded = false;
+  $('.gallery-filters').hidden = false;
+  $('.video-grid').id = 'video-grid';
+  more.setAttribute('aria-controls', 'video-grid');
+  function renderGallery() {
+    const matches = cards.filter((card) => activeFilter === 'all' || card.dataset.category === activeFilter);
+    const limit = activeFilter === 'all' && !expanded ? 4 : matches.length;
+    cards.forEach((card) => { card.hidden = !matches.slice(0,limit).includes(card); });
+    const visible = Math.min(limit, matches.length);
+    counter.textContent = visible === matches.length ? `${visible} exemplo${visible===1?'':'s'}` : `${visible} de ${matches.length} exemplos`;
+    more.hidden = activeFilter !== 'all' || matches.length <= 4;
+    more.setAttribute('aria-expanded', String(expanded));
+    more.innerHTML = `${expanded ? 'Mostrar menos' : 'Ver mais exemplos'} <svg class="icon" aria-hidden="true"><use href="#i-${expanded?'close':'plus'}"></use></svg>`;
+  }
+  filters.forEach((button) => button.addEventListener('click', () => {
+    activeFilter = button.dataset.filter;
+    filters.forEach((item) => {item.classList.toggle('is-active',item===button);item.setAttribute('aria-pressed',String(item===button));});
+    renderGallery();
+  }));
+  more.addEventListener('click', () => {
+    expanded = !expanded;
+    renderGallery();
+    if (!expanded) more.scrollIntoView({block:'nearest',behavior:reduced.matches?'instant':'smooth'});
+  });
+  renderGallery();
 
-    const closeMenu = (restoreFocus = false) => {
-      if (!menuToggle || !navigation) return;
-      const wasOpen = navigation.classList.contains("is-open");
-      navigation.classList.remove("is-open");
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Abrir menu");
-      if (restoreFocus && wasOpen) menuToggle.focus();
-      scheduleLayoutUpdate();
-    };
-
-    const intersectsViewport = (element, viewportHeight) => {
-      if (!element) return false;
-      const bounds = element.getBoundingClientRect();
-      return bounds.top < viewportHeight && bounds.bottom > 0;
-    };
-
-    const updateLayout = () => {
-      framePending = false;
-      if (window.innerWidth > 800 && navigation && navigation.classList.contains("is-open")) closeMenu();
-      if (!stickyCta || !hero) return;
-
-      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-      const shouldShow = hero.getBoundingClientRect().bottom <= 0
-        && !intersectsViewport(offer, viewportHeight)
-        && !intersectsViewport(finalCta, viewportHeight)
-        && !(navigation && navigation.classList.contains("is-open"))
-        && !(dialog && dialog.open)
-        && !document.body.classList.contains("coupon-is-open");
-      stickyCta.hidden = !shouldShow;
-    };
-
-    function scheduleLayoutUpdate() {
-      if (framePending) return;
-      framePending = true;
-      if (window.requestAnimationFrame) window.requestAnimationFrame(updateLayout);
-      else window.setTimeout(updateLayout, 16);
+  async function closeVideo() {
+    if (!dialog.open || closing) return;
+    closing = true;
+    player.pause();
+    if (!reduced.matches && dialog.animate) {
+      await $('.media-shell').animate([{opacity:1,transform:'translateY(0) scale(1)'},{opacity:0,transform:'translateY(25px) scale(.95)'}],{duration:200,easing:'ease-in',fill:'forwards'}).finished.catch(()=>{});
     }
+    dialog.close();
+  }
+  $$('.video-open').forEach((link) => link.addEventListener('click', (event) => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || typeof dialog.showModal !== 'function') return;
+    event.preventDefault();
+    returnFocus = link;
+    closing = false;
+    $('.media-shell').getAnimations().forEach((animation) => animation.cancel());
+    $('#media-title').textContent = link.dataset.title;
+    $('.media-status').hidden = true;
+    $('#media-fallback').href = link.href;
+    player.poster = link.querySelector('img').src;
+    player.src = link.dataset.video;
+    dialog.showModal();
+    document.body.classList.add('modal-is-open');
+    updateSticky();
+    $('#media-close').focus({preventScroll:true});
+    player.play().catch(() => { /* Native controls allow playback if autoplay is blocked. */ });
+  }));
+  $('#media-close').addEventListener('click', closeVideo);
+  dialog.addEventListener('cancel', (event) => {event.preventDefault();closeVideo();});
+  dialog.addEventListener('click', (event) => {if (event.target===dialog) closeVideo();});
+  dialog.addEventListener('close', () => {
+    player.pause();player.removeAttribute('src');player.load();
+    document.body.classList.remove('modal-is-open');closing=false;
+    updateSticky();
+    if (returnFocus?.isConnected) returnFocus.focus({preventScroll:true});
+  });
+  player.addEventListener('error', () => {if(dialog.open && player.hasAttribute('src')) $('.media-status').hidden=false;});
+  document.addEventListener('visibilitychange', () => {if(document.hidden) player.pause();});
 
-    if (menuToggle && navigation) {
-      menuToggle.hidden = false;
-      menuToggle.addEventListener("click", () => {
-        const isOpen = navigation.classList.toggle("is-open");
-        menuToggle.setAttribute("aria-expanded", String(isOpen));
-        menuToggle.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
-        scheduleLayoutUpdate();
-      });
-      navigation.addEventListener("click", (event) => {
-        if (event.target instanceof Element && event.target.closest("a")) closeMenu();
-      });
-      document.addEventListener("click", (event) => {
-        if (!navigation.contains(event.target) && !menuToggle.contains(event.target)) closeMenu();
-      });
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && navigation.classList.contains("is-open")) closeMenu(true);
-      });
-    }
+  const exposure = new Map([[hero,true],[offer,false],[final,false]]);
+  function updateSticky() {
+    sticky.hidden = exposure.get(hero) || exposure.get(offer) || exposure.get(final)
+      || menu.classList.contains('is-open') || dialog.open || document.body.classList.contains('coupon-is-open');
+  }
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => exposure.set(entry.target,entry.isIntersecting));updateSticky();
+    },{threshold:0});
+    [hero,offer,final].forEach((element) => observer.observe(element));
+  }
+  document.addEventListener('cria:coupon-change',updateSticky);
+})();
 
-    document.addEventListener("cria:coupon-change", scheduleLayoutUpdate);
-    window.addEventListener("scroll", scheduleLayoutUpdate, { passive: true });
-    window.addEventListener("resize", scheduleLayoutUpdate, { passive: true });
-    window.addEventListener("load", scheduleLayoutUpdate, { once: true });
-    if ("ResizeObserver" in window) {
-      const layoutObserver = new ResizeObserver(scheduleLayoutUpdate);
-      layoutObserver.observe(document.body);
-    }
-
-    const filters = Array.from(document.querySelectorAll(".filter-button[data-filter]"));
-    const galleryItems = Array.from(document.querySelectorAll(".gallery-item[data-kind]"));
-    const galleryStatus = document.getElementById("gallery-status");
-    const galleryMore = document.getElementById("gallery-more");
-    const galleryToolbar = document.querySelector(".gallery-toolbar");
-    const initialItemCount = 6;
-    const galleryMobile = window.matchMedia ? window.matchMedia("(max-width: 800px)") : null;
-    let activeFilter = "all";
-    let galleryExpanded = false;
-
-    const updateGallery = () => {
-      // One full-width FOOH followed by three complete pairs on mobile.
-      const itemLimit = activeFilter !== "image" && (galleryMobile ? galleryMobile.matches : window.innerWidth <= 800)
-        ? initialItemCount + 1 : initialItemCount;
-      const matching = galleryItems.filter((item) => activeFilter === "all" || item.dataset.kind === activeFilter);
-      const visible = new Set(galleryExpanded ? matching : matching.slice(0, itemLimit));
-      galleryItems.forEach((item) => {
-        item.hidden = !visible.has(item);
-        if (item.hidden) {
-          if (item.matches("video")) pauseVideo(item);
-          item.querySelectorAll("video").forEach(pauseVideo);
-        }
-      });
-      filters.forEach((button) => {
-        const selected = button.dataset.filter === activeFilter;
-        button.setAttribute("aria-pressed", String(selected));
-        button.classList.toggle("is-active", selected);
-      });
-      if (galleryMore) {
-        galleryMore.hidden = matching.length <= itemLimit;
-        galleryMore.textContent = galleryExpanded ? "Mostrar menos" : "Ver mais exemplos";
-        galleryMore.setAttribute("aria-expanded", String(galleryExpanded));
-      }
-      if (galleryStatus) {
-        const type = activeFilter === "image" ? "imagens" : activeFilter === "video" ? "vídeos" : "exemplos";
-        galleryStatus.textContent = matching.length
-          ? `${visible.size} de ${matching.length} ${type}`
-          : "Nenhum exemplo nesta categoria.";
-      }
-      scheduleLayoutUpdate();
-    };
-
-    if (galleryItems.length) {
-      const filterGroup = document.querySelector(".gallery-filters");
-      if (filterGroup) filterGroup.hidden = false;
-      filters.forEach((button) => {
-        button.addEventListener("click", () => {
-          activeFilter = button.dataset.filter;
-          galleryExpanded = false;
-          updateGallery();
-        });
-      });
-      if (galleryMore) {
-        galleryMore.addEventListener("click", () => {
-          if (galleryExpanded && galleryToolbar) {
-            const selectedFilter = filters.find((button) => button.dataset.filter === activeFilter);
-            if (selectedFilter) {
-              try { selectedFilter.focus({ preventScroll: true }); } catch (_) { selectedFilter.focus(); }
-            }
-            // Move to a stable anchor before removing rows above the focused button.
-            if (galleryToolbar.scrollIntoView) {
-              try {
-                galleryToolbar.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
-              } catch (_) {
-                galleryToolbar.scrollIntoView();
-              }
-            }
-          }
-          galleryExpanded = !galleryExpanded;
-          updateGallery();
-        });
-      }
-      updateGallery();
-      if (galleryMobile) {
-        if (galleryMobile.addEventListener) galleryMobile.addEventListener("change", updateGallery);
-        else if (galleryMobile.addListener) galleryMobile.addListener(updateGallery);
-      }
-    }
-
-    const dialogImage = document.getElementById("dialog-image");
-    const dialogCaption = document.getElementById("dialog-caption");
-    let returnFocus = null;
-    if (dialog && dialogImage && typeof dialog.showModal === "function") {
-      document.querySelectorAll("a[data-lightbox]").forEach((link) => {
-        link.addEventListener("click", (event) => {
-          if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-          const thumbnail = link.querySelector("img");
-          dialogImage.src = link.href;
-          dialogImage.alt = thumbnail ? thumbnail.alt : (link.dataset.caption || "Exemplo criado com o CRIA");
-          if (dialogCaption) dialogCaption.textContent = link.dataset.caption || dialogImage.alt;
-          try {
-            dialog.showModal();
-          } catch (_) {
-            return; // Keep the original image link usable if a browser cannot open the dialog.
-          }
-          event.preventDefault();
-          returnFocus = link;
-          pauseAllVideos();
-          scheduleLayoutUpdate();
-        });
-      });
-      const closeButton = dialog.querySelector(".dialog-close");
-      if (closeButton) closeButton.addEventListener("click", () => dialog.close());
-      dialog.addEventListener("click", (event) => {
-        if (event.target !== dialog) return;
-        const bounds = dialog.getBoundingClientRect();
-        if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) {
-          dialog.close();
-        }
-      });
-      dialog.addEventListener("close", () => {
-        if (returnFocus && returnFocus.isConnected) {
-          try { returnFocus.focus({ preventScroll: true }); } catch (_) { returnFocus.focus(); }
-        }
-        returnFocus = null;
-        dialogImage.removeAttribute("src");
-        videos.forEach(updateVideo);
-        scheduleLayoutUpdate();
-      });
-    }
-
-    const revealElements = Array.from(document.querySelectorAll(".reveal"));
-    let revealObserver = null;
-    const revealAll = () => {
-      revealElements.forEach((element) => {
-        element.classList.remove("will-reveal");
-        element.classList.add("is-visible");
-      });
-      if (revealObserver) revealObserver.disconnect();
-    };
-
-    if ("IntersectionObserver" in window && !prefersReducedMotion()) {
-      try {
-        revealObserver = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("is-visible");
-            revealObserver.unobserve(entry.target);
-          });
-        }, { threshold: 0.06, rootMargin: "0px 0px -24px 0px" });
-        revealElements.forEach((element) => {
-          element.classList.add("will-reveal");
-          revealObserver.observe(element);
-        });
-      } catch (_) {
-        revealAll();
-      }
-    }
-
-    const updatePreferences = () => {
-      if (prefersReducedMotion()) revealAll();
-      if (prefersReducedMotion() || prefersLessData()) pauseAllVideos();
-      else videos.forEach(updateVideo);
-    };
-    if (motionPreference) {
-      if (motionPreference.addEventListener) motionPreference.addEventListener("change", updatePreferences);
-      else if (motionPreference.addListener) motionPreference.addListener(updatePreferences);
-    }
-    if (connection && connection.addEventListener) connection.addEventListener("change", updatePreferences);
-    scheduleLayoutUpdate();
-
-    // Keep the existing PageView measurement restricted to the published CRIA domains.
+(() => {
     const productionHosts = ["cria.club", "www.cria.club", "cria300.vercel.app"];
     if (productionHosts.includes(window.location.hostname.toLowerCase()) && !window.__criaPixelInitialized) {
       window.__criaPixelInitialized = true;
@@ -345,10 +164,6 @@
       window.fbq("init", "1509642039730970");
       window.fbq("track", "PageView");
     }
-  };
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initialize, { once: true });
-  else initialize();
 })();
 
 /* ── COUPON POPUP: presentation only; capture contract preserved below. ── */
@@ -521,7 +336,7 @@
       return;
     }
     // Validação WhatsApp — mínimo 10 dígitos (DDD + número)
-    if (!whatsapp || whatsapp.length < 10) {
+    if (!/^[1-9]{2}\d{8,9}$/.test(whatsapp)) {
       errorMsg.hidden = false;
       errorMsg.textContent = "Por favor, insira seu WhatsApp com DDD.";
       whatsappInp && whatsappInp.focus();
@@ -531,12 +346,19 @@
 
     // Feedback no botão
     const submitBtn = form.querySelector(".coupon-submit");
-    submitBtn.innerHTML = "Salvando…";
+    const initialLabel = submitBtn.innerHTML;
+    submitBtn.textContent = "Salvando…";
     submitBtn.disabled = true;
 
-    await saveLead(email, "+55" + whatsapp);
-
-    localStorage.setItem(STORAGE_KEY, "1");
+    const saved = await saveLead(email, "+55" + whatsapp);
+    if (!saved) {
+      errorMsg.textContent = "Não foi possível salvar agora. Tente novamente em instantes.";
+      errorMsg.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = initialLabel;
+      return;
+    }
+    try { localStorage.setItem(STORAGE_KEY, "1"); } catch (_) { /* Success remains available in this visit. */ }
     formState.hidden = true;
     succState.hidden = false;
   });
@@ -550,7 +372,7 @@
         copyBtn.textContent = "Copiar";
         copyBtn.classList.remove("copied");
       }, 2500);
-    });
+    }).catch(() => { copyBtn.textContent = "Use o código CRIA25"; });
   });
 
   // Fechar ao clicar em "Usar meu cupom agora"

@@ -1,87 +1,65 @@
-# CRIA — nova landing page
+# CRIA — 500 prompts de vídeo para IA
 
-Site estático em HTML, CSS e JavaScript, sem etapa de build ou dependências de aplicação. Compatível com a hospedagem estática existente na Vercel.
+Página de vendas estática reformulada para a biblioteca CRIA 500. HTML com o conteúdo completo, CSS e JavaScript sem dependências de execução. A hospedagem continua na Vercel e o domínio canônico é https://www.cria.club/.
 
-## Retorno à Kiwify — 20/10/2026
+## Conteúdo e oferta
 
-Todos os sete botões e o JSON-LD voltaram para https://pay.kiwify.com.br/7fTgGYD. Oferta pública conferida: R$47,00 à vista ou 11x de R$5,22, total R$57,42 com acréscimo. CRIA25 foi aceito com 25% de desconto e R$35,25 à vista. Nenhum dado de comprador foi preenchido e nenhuma compra foi realizada. As referências e a taxa da Cakto foram removidas da landing page.
+- 500 prompts exclusivamente de vídeo, em 18 categorias, com cenas de até 15 segundos.
+- FOOH: 40; UGC: 40; Comerciais de produto: 35; Packshots & loops: 35. As outras 14 categorias têm 25 cada.
+- 350 prompts em 9:16 e 150 em 16:9. O horizontal fica em Cinematic pessoa, Animação & fantasia, Atmosférico & sci-fi, Drone & aerial, Microcinema & curta e Esporte & ação.
+- Todos os FOOH são sem falas. As capas representam um único frame, e não um resultado garantido.
+- A biblioteca inclui prévias, resumos, personalizador, busca, filtros, favoritos e vistos recentemente. O personalizador monta campos preparados localmente, sem API paga; não é um chat de reescrita livre com IA.
+- R$47 à vista ou 11x de R$5,22, total R$57,42 com acréscimo. Compra única, atualizações incluídas, acesso após confirmação e garantia integral de 7 dias.
+- A geração acontece na ferramenta de IA do comprador. Contas, assinaturas e créditos dessas ferramentas não estão incluídos.
 
-Formulário de captura, scripts.js, styles.css, exemplos e vídeos preservados. Nenhum webhook, receptor de compra ou configuração do Supabase foi alterado neste retorno. O cadastro anterior da Cakto foi mantido para eventuais pagamentos pendentes; somente o destino dos novos visitantes foi alterado.
+Checkout preservado: https://pay.kiwify.com.br/7fTgGYD. O cupom CRIA25 oferece 25% de desconto: R$35,25 à vista, economia de R$11,75. O comprador deve aplicar e conferir o desconto no checkout; sua configuração comercial continua na Kiwify. A página não recebe dados de cartão.
 
-## Organização
+## Arquivos
 
-- `index.html`: conteúdo, galeria, oferta, FAQ e metadados.
-- `styles.css`: identidade visual, componentes, responsividade e preferências de movimento.
-- `scripts.js`: menu móvel, galeria, ampliação das imagens, vídeos, CTA fixo, Meta Pixel e apresentação do pop-up de leads.
-- `media/optimized/`: imagens WebP com versões de 480 e até 1000 pixels.
-- `media/posters/`: imagens de apresentação dos vídeos. As capas `*-impact.webp` são frames reais dos exemplos, escolhidos para mostrar o efeito ou a cena em destaque.
-- `media/video/`: vídeos MP4 H.264/AAC otimizados, com carregamento sob demanda.
-- `media/logo-cria.png`: logo oficial original, usada no cabeçalho, rodapé, mockup, favicon e compartilhamento social.
-- `favicon.svg`, `robots.txt`, `sitemap.xml`: identidade e descoberta do site.
+- `index.html`: proposta, exemplos, categorias, personalizador, criador, oferta e FAQ. Inclui metadados e dados estruturados.
+- `styles.css` e `scripts.js`: fontes legíveis para manutenção.
+- `styles.min.css` e `scripts.min.js`: versões compactadas carregadas pela página, prontas para hospedar sem build.
+- `media/cria500/`: capturas reais da biblioteca, prévias do catálogo, capas responsivas, vídeos e imagem de compartilhamento 1200 × 630.
+- `media/fonts/`: fontes hospedadas no próprio site e suas licenças OFL.
+- `favicon.svg`, `robots.txt`, `sitemap.xml` e `vercel.json`: identidade, descoberta, redirecionamento de `/index.html` para `/` e cache.
 
-## Prévia local
+Os arquivos antigos de mídia permanecem no repositório para preservar o acervo. Eles não fazem parte da nova galeria. Nenhum arquivo de prompt, automação de compra ou webhook da área de membros foi alterado neste projeto.
 
-Abra um terminal na pasta do site e execute `python -m http.server 4173 --bind 127.0.0.1`. Acesse `http://127.0.0.1:4173/` no navegador. Também é possível abrir o `index.html` diretamente, mas um servidor local é preferível para testar vídeos e navegação.
+## Prévia e manutenção
 
-## Manutenção da oferta
+Execute `python -m http.server 4180 --bind 127.0.0.1` na pasta e abra http://127.0.0.1:4180/.
 
-O link de compra continua sendo `https://pay.kiwify.com.br/7fTgGYD`. Todos os botões de compra vão diretamente para esse checkout, inclusive a barra fixa e o botão após a captura de lead. Os links de navegação e “Ver vídeos do CRIA” conduzem às seções da página.
+Depois de editar CSS ou JavaScript, regenere os arquivos servidos:
 
-Condições preservadas: R$47 à vista, 11 parcelas de R$5,22 (total R$57,42 com acréscimo), compra única, garantia de 7 dias, atualizações futuras, acesso à plataforma com 300 prompts e guia de adaptação. Atualize conjuntamente o resumo da oferta, a FAQ, os textos de preço, a barra fixa, a descrição SEO e o JSON-LD quando as condições comerciais mudarem.
+```sh
+npx --yes esbuild styles.css --minify --target=chrome109,safari16,firefox115 --outfile=styles.min.css
+npx --yes esbuild scripts.js --minify --target=chrome109,safari16,firefox115 --outfile=scripts.min.js
+```
 
-O pagamento é concluído na Kiwify; esta landing page não coleta dados de cartão e não contém checkout próprio. As ferramentas de IA e seus créditos são contratados separadamente.
+Incremente a versão das URLs no HTML a cada revisão. Novas mídias devem receber nomes novos: `media/cria500/` e as fontes usam cache imutável por um ano. CSS e JavaScript são revalidados. Os `.min` incluídos podem ser publicados diretamente; Node e esbuild só são necessários para regenerá-los.
 
-## Medição e contato
+Ao mudar quantidade, preço ou condições, atualize cópia visível, FAQ, metadados, imagem social e JSON-LD em conjunto. Não adicione avaliações ou resultados comerciais sem evidência real.
 
-- Meta Pixel: `1509642039730970`, evento `PageView` preservado.
-- Com JavaScript, a medição só é iniciada em `cria.club`, `www.cria.club` e `cria300.vercel.app`, para evitar visitas de teste local. O fallback original de imagem sem JavaScript permanece no HTML.
-- `CRIA_CheckoutClick`: evento personalizado do Pixel, com `position` para diferenciar os botões. Mede intenção de saída para a Kiwify; não é uma confirmação de início de checkout nem de compra.
-- `CRIA_CouponOpen`: evento personalizado com o gatilho de abertura do pop-up.
-- Instagram: `https://instagram.com/dg_vfx`.
-- WhatsApp: `555180328211`.
+## Integrações preservadas
 
-## Decisões de experiência
+O formulário mantém o Supabase existente, chave pública anônima, tabela `leads`, cabeçalhos e corpo `{ email, whatsapp, source: "popup_cupom" }`, com prefixo `+55`. Não foram alteradas configurações externas do Supabase ou da Kiwify. O sucesso agora depende de resposta bem-sucedida do servidor: falhas permitem tentar novamente e não marcam um lead como capturado.
 
-A página apresenta, nesta ordem: proposta e preço, modo de uso, exemplos, diferenciação da biblioteca, criador, oferta completa, FAQ e CTA final. Preço, compra única, garantia e ferramentas de IA separadas aparecem já no início. No celular, o cartão de preço precede a lista completa de itens.
+Os marcadores `cria_lead_captured` e `cria_coupon_dismissed` foram mantidos. O cupom pode ser aberto voluntariamente; gatilhos automáticos continuam exigindo envolvimento e exposição ao conteúdo, sem interromper oferta, compra, vídeo, campo em foco, menu ou diálogo. A interface restaura o foco e bloqueia o fundo enquanto o formulário está aberto.
 
-A apresentação inicial destaca um vídeo FOOH e prévias reproduzíveis de animação e UGC, com capas reais e botões centrais de play. No celular, o FOOH ocupa toda a largura do bloco e fica logo após os botões e a garantia. A galeria também destaca o primeiro FOOH em toda a largura no celular, mantendo os demais em uma grade compacta. Os vídeos da galeria usam a proporção original de 9:16; os vídeos da abertura preservam o enquadramento completo durante a reprodução.
+Meta Pixel `1509642039730970` preservado: `PageView`, `CRIA_CheckoutClick` com posição e `CRIA_CouponOpen` com gatilho. A inicialização JavaScript ocorre apenas nos domínios de produção existentes. O fallback sem JavaScript foi mantido. Cliques de checkout representam intenção, não confirmação de compra.
 
-A galeria agrupa os vídeos nesta ordem: FOOH, Animação, UGC e Cinematic; o exemplo adicional de Packshot vem após esses grupos. Começa com seis vídeos no desktop e sete no celular (um FOOH em destaque seguido de três duplas), oferece filtros e expansão, e mantém todos os 14 vídeos antes das 12 imagens. O filtro de imagens permite acessá-las diretamente. Os 12 exemplos de imagem e os 14 de vídeo foram preservados. Imagens abrem em ampliação. Vídeos começam apenas pelo controle do visitante, carregam sob demanda e param fora de vista. Iniciar um vídeo pausa o anterior. Os controles nativos ficam disponíveis durante a reprodução, inclusive para volume e tela cheia. A barra fixa aparece depois da primeira seção e se esconde diante do cartão de compra, do CTA final e de menus ou diálogos abertos.
+Suporte: WhatsApp `555180328211`. Instagram: https://instagram.com/dg_vfx. Área de membros: https://cria-prompts.vercel.app/.
 
-A direção visual mantém o grafite e a marca azul/violeta, reserva o azul claro dos botões para ações principais e usa fundos discretamente diferentes entre conteúdo, galeria e oferta. Textos secundários têm mais contraste. Molduras e etiquetas foram simplificadas para priorizar os exemplos visuais; o card de preço mantém a hierarquia original.
+## Desempenho e experiência
 
-Sem JavaScript, a navegação, as perguntas frequentes, as imagens, os controles dos vídeos e o link de compra continuam disponíveis. Os filtros interativos ficam ocultos e a galeria mostra todos os exemplos.
+Imagens AVIF com fallback WebP, tamanhos responsivos, dimensões declaradas e carregamento tardio fora da abertura. A captura principal é descoberta no HTML e tem prioridade alta. Fontes locais com `font-display: swap`. Nenhum MP4 carrega antes do clique.
 
-Não há contagem regressiva artificial. Não foram adicionados depoimentos, avaliações, números de clientes, capturas fictícias da plataforma nem promessas de resultados idênticos. A apresentação usa exemplos existentes e explica o fluxo de encontrar, adaptar e gerar. O cliente recebe acesso à biblioteca de prompts; imagens e vídeos são gerados nas ferramentas de IA indicadas.
+Oito exemplos de vídeo, com filtros e expansão. Um único player em diálogo nativo, controles de reprodução e liberação do arquivo ao fechar. Os quatro exemplos de FOOH foram exportados sem áudio; todos os oito têm até 15 segundos. A galeria começa com quatro cards. Sem JavaScript, os oito ficam disponíveis por links diretos.
 
-## Pop-up e integrações preservadas
+Entradas suaves, flutuação da captura, hover nos cards e pop-up expressivo. A preferência de reduzir movimento é respeitada automaticamente. Menu móvel, FAQ nativa, foco visível, link para pular ao conteúdo e fechamento por Escape. O CTA fixo se oculta diante da abertura, da oferta, do CTA final e de menus ou diálogos abertos.
 
-O pop-up mantém os campos e a rotina original de captura. Endereço do Supabase, chave pública existente, tabela `leads`, cabeçalhos, corpo `{ email, whatsapp, source: "popup_cupom" }`, prefixo `+55` e marcador `cria_lead_captured` foram preservados. O fluxo de envio do formulário permanece igual. Não há webhook de compra neste repositório; nenhuma configuração externa de Kiwify ou Supabase foi alterada.
+## SEO e validação
 
-O pop-up não abre por tempo isolado nem pela profundidade de rolagem:
+Título e descrição alinhados à oferta, um H1, títulos de seção semânticos, conteúdo rastreável sem JavaScript, canonical em `www.cria.club`, Open Graph/Twitter com imagem 1200 × 630, textos alternativos, robots e sitemap. JSON-LD com Organization, WebSite, WebPage e Product/Offer de R$47, sem avaliações inventadas. Não foram prometidas posições de busca ou resultados idênticos de geração.
 
-- Desktop a partir de 900 px: intenção de sair pelo topo, após 45 segundos de visita visível e exposição aos exemplos ou à oferta.
-- Retorno pelo conteúdo: após 60 segundos de visita visível, ter visto o cartão de oferta e subir pelo menos 160 px. É o sinal utilizado no celular.
-- Abertura voluntária: “Receber meu cupom”, depois das perguntas frequentes.
-
-Os gatilhos automáticos não interrompem o cartão de compra, o CTA final, vídeos em reprodução, campos em foco, menu ou ampliação de imagem. Clicar em um botão de compra ou dispensar o pop-up desativa novas interrupções naquela sessão. Leads já capturados não recebem a oferta de cadastro. O formulário pode ser reaberto voluntariamente após fechar.
-
-O desconto existente é de 25%, com código `CRIA25`: R$47 → R$35,25 à vista. O botão de sucesso mantém o endereço original da Kiwify e informa que o comprador precisa aplicar o código antes de pagar. A configuração e a validade comercial desse cupom continuam sendo administradas na Kiwify.
-
-O pop-up possui fechamento por botão, Escape e fundo, foco contido no diálogo e restauração de foco. No celular, abrir o pop-up não aciona o teclado automaticamente.
-
-## Verificação da reformulação
-
-Foram conferidos os arquivos e destinos da página, os 26 exemplos, os campos do formulário, os links de compra e a sintaxe JavaScript. Os gatilhos e o envio de lead foram exercitados com requisições simuladas: nenhum lead de teste foi enviado ao Supabase e nenhuma compra foi realizada. Essa verificação comprova o contrato do código; a disponibilidade dos serviços e o recebimento real dependem das integrações externas existentes.
-
-## Publicação e versionamento
-
-Os arquivos estão prontos para o fluxo GitHub → Vercel já utilizado pelo projeto. A reformulação não exige mudar o framework, adicionar serviços ou instalar pacotes. Publique `index.html`, `styles.css`, `scripts.js`, este README e os 14 novos arquivos `media/posters/*-impact.webp` juntos. Os vídeos e as imagens anteriores não foram alterados. Esta revisão usa CSS `20261004.3` e JavaScript `20261004.4`.
-
-O domínio canônico é `https://www.cria.club/`. Se o domínio mudar, revise canonical, Open Graph, Twitter, JSON-LD, sitemap e a lista de domínios do Pixel. Ao atualizar CSS/JS, altere a versão nos respectivos links do HTML para invalidar caches.
-
-Os arquivos de mídia antigos foram mantidos no projeto para facilitar a reversão. A página utiliza os arquivos otimizados.
-
-## Logo oficial
-
-A identidade mantém os tons de azul e violeta da logo. O PNG original foi preservado integralmente, inclusive sua transparência.
+Validações de entrega: viewport de 320 a 1440 px, teclado, redução de movimento, fluxo sem JavaScript, vídeos sob demanda, links, integridade dos arquivos e cupom com respostas simuladas de falha e sucesso. Nenhum lead ou pagamento real foi criado nos testes.
