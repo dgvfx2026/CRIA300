@@ -71,7 +71,7 @@ Validações de entrega: viewport de 320 a 1440 px, teclado, redução de movime
 
 Abertura voltada a vídeos para marcas, benefícios mais diretos, condições legíveis, resumo de compra após os exemplos e cartão de preço antes da lista de inclusões no celular. As categorias adicionais ficam em uma expansão nativa, e a biografia foi compactada. A oferta detalhada aparece antes da biblioteca completa.
 
-O botão “Ver um prompt real” e a prévia inicial abrem o FOOH “Produto atravessando a cidade” (cria-004), que usa uma única foto de produto, sem marca ou cidade específicas. Os quatro cards de categoria abrem amostras reais: cria-004, cria-331, cria-022 e cria-366. Os textos são cópias integrais do catálogo, sem reescrita. Não há gravação nova de execução ou depoimentos adicionados.
+O botão “Ver um prompt real” e a prévia inicial abrem o FOOH “Produto atravessando a cidade” (cria-004), que usa uma única foto de produto, sem marca ou cidade específicas. Os quatro cards de categoria abrem amostras reais: cria-004, cria-331, cria-166 e cria-366. Os textos são cópias integrais do catálogo, sem reescrita. Não há gravação nova de execução ou depoimentos adicionados.
 
 O vídeo de relógio existente foi preparado como exemplo de comercial, com exportação de até 15s. A capa é um frame do próprio vídeo. Os exemplos não são apresentados como execuções exatas das quatro amostras.
 
