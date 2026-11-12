@@ -10,6 +10,7 @@
   const hero = $('.hero');
   const offer = $('.offer-card');
   const final = $('#final-cta');
+  const summary = $('.offer-summary');
   const dialog = $('#media-dialog');
   const player = $('#example-player');
   let returnFocus = null;
@@ -89,6 +90,13 @@
   });
   renderGallery();
 
+  const peek=$('.personalizer-peek');
+  const narrow=matchMedia('(max-width: 650px)');
+  if(peek){
+    const adjustPeek=()=>{peek.open=!narrow.matches;};
+    adjustPeek();narrow.addEventListener('change',adjustPeek);
+  }
+
   async function closeVideo() {
     if (!dialog.open || closing) return;
     closing = true;
@@ -127,18 +135,19 @@
   player.addEventListener('error', () => {if(dialog.open && player.hasAttribute('src')) $('.media-status').hidden=false;});
   document.addEventListener('visibilitychange', () => {if(document.hidden) player.pause();});
 
-  const exposure = new Map([[hero,true],[offer,false],[final,false]]);
+  const exposure = new Map([[hero,true],[offer,false],[final,false],[summary,false]]);
   function updateSticky() {
-    sticky.hidden = exposure.get(hero) || exposure.get(offer) || exposure.get(final)
-      || menu.classList.contains('is-open') || dialog.open || document.body.classList.contains('coupon-is-open');
+    sticky.hidden = exposure.get(hero) || exposure.get(offer) || exposure.get(final) || exposure.get(summary)
+      || menu.classList.contains('is-open') || Boolean(document.querySelector('dialog[open]')) || document.body.classList.contains('coupon-is-open');
   }
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => exposure.set(entry.target,entry.isIntersecting));updateSticky();
     },{threshold:0});
-    [hero,offer,final].forEach((element) => observer.observe(element));
+    [hero,offer,final,summary].filter(Boolean).forEach((element) => observer.observe(element));
   }
   document.addEventListener('cria:coupon-change',updateSticky);
+  document.addEventListener('cria:modal-change',updateSticky);
 })();
 
 (() => {
@@ -221,8 +230,8 @@
   };
   const canInterrupt = () => !document.hidden && !checkoutIntent
     && !readFlag("sessionStorage", SESSION_KEY)
-    && !inView(offer) && !inView(finalCta)
-    && !(mediaDialog && mediaDialog.open)
+    && !inView(offer) && !inView(finalCta) && !inView(document.querySelector(".offer-summary"))
+    && !document.querySelector("dialog[open]")
     && !document.querySelector(".site-nav.is-open")
     && document.activeElement?.tagName !== "VIDEO"
     && !Array.from(document.querySelectorAll("video")).some((video) => !video.paused && !video.ended)
