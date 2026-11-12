@@ -53,4 +53,12 @@
 html:not(.js) #lead-invite{display:none}
 @media(max-width:650px){html:not(.js) .menu-toggle{display:none}html:not(.js) .header-inner{flex-wrap:wrap;padding-block:18px;gap:10px}html:not(.js) .site-nav{position:static;display:flex;flex-direction:row;flex-wrap:wrap;order:3;width:100%;padding:0;gap:15px;background:none;border:0;box-shadow:none;backdrop-filter:none}html:not(.js) .site-nav a{font-size:10px;padding:5px 0}html:not(.js) .site-nav .member-link{margin:0;border:0}html:not(.js) .hero{padding-top:134px}}
 @media(max-width:360px){.category-copy h3{font-size:20px}.category-copy p{font-size:9px}.other-categories li{font-size:9px}.gallery-filters button{font-size:8px}.gallery-counter{font-size:8px}.video-watch{font-size:7px}.footer-top>div{font-size:8px}}
+/* Amber accent trial: action buttons and offer details. */
+:root{--accent:#ffb45b;--accent-soft:#ffc47c;--action-ink:#101725}
+.primary,.coupon-submit,.coupon-cta-btn{color:var(--action-ink);background:linear-gradient(110deg,var(--accent-soft),var(--accent));box-shadow:inset 0 1px 0 #fff8,0 7px 26px #ffb45b18}
+.price strong,.coupon-price-note strong,.coupon-code-box>span{color:var(--accent)}
+.offer-top .pill{color:var(--accent-soft);border-color:#ffb45b44;background:#ffb45b0a}
+.coupon-badge,.coupon-title span,.coupon-invite h2 em{color:var(--accent-soft)}
+.coupon-code-box{border-color:#ffb45b66}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.primary:hover,.coupon-cta-btn:hover,.coupon-submit:hover{background:linear-gradient(110deg,#ffd198,var(--accent-soft));border-color:#ffcf95a6;box-shadow:inset 0 1px 0 #fff8,0 15px 35px #ffb45b26}}
 @media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.reveal[data-reveal]{opacity:1;transform:none}.library-window{transform:none}.personalizer-window,.personalizer-stamp{transform:none}.faq-item::details-content{transition:none}.hero-enter{opacity:1;transform:none}}
