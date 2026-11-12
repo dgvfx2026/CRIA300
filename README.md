@@ -76,3 +76,7 @@ O botão “Ver um prompt real” e a prévia inicial abrem o FOOH “Produto at
 O vídeo de relógio existente foi preparado como exemplo de comercial, com exportação de até 15s. A capa é um frame do próprio vídeo. Os exemplos não são apresentados como execuções exatas das quatro amostras.
 
 Checkout e sua configuração externa permanecem inalterados. O cadastro, desconto, campos e gatilhos do cupom foram mantidos; apenas as proteções de interrupção abrangem o novo diálogo e o resumo de compra. Os ajustes de checkout, a gravação de demonstração e a estratégia de cupom ficaram fora desta etapa por solicitação do usuário.
+
+## Refinamento visual — 500.4
+
+Hierarquia do título com promessa principal em destaque e itálico curto; fotos de categoria com mais área visível e contagem no canto superior; vidro mais translúcido nos diálogos e na barra fixa, com superfície estável de leitura; borda e iluminação âmbar discretas no cartão da oferta. Conteúdo dos prompts, imagens aprovadas, checkout e captura preservados.
